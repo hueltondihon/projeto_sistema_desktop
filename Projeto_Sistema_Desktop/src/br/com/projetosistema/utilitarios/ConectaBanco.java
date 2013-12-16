@@ -31,7 +31,7 @@ public class ConectaBanco {
        }
    }
    
-   public void desconecta(){
+   public void desconecta(){ // metodo responsavel por desconectar do banco
        try {
            conn.close();
             JOptionPane.showMessageDialog(null, "Desconectado do Banco!");
