@@ -32,7 +32,6 @@ public class JfrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMCadastro = new javax.swing.JMenu();
         jMItemEstado = new javax.swing.JMenuItem();
@@ -47,10 +46,9 @@ public class JfrmPrincipal extends javax.swing.JFrame {
         jMRelatorio = new javax.swing.JMenu();
         jMSair = new javax.swing.JMenu();
 
-        jButton1.setText("jButton1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         jMCadastro.setText("Cadastro");
@@ -154,7 +152,6 @@ public class JfrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMCadastro;
     private javax.swing.JMenu jMCompra;
     private javax.swing.JMenuItem jMItemBairro;
