@@ -6,17 +6,21 @@
 
 package br.com.projetosistema.forms;
 
+import br.com.projetosistema.utilitarios.ConectaBanco;
+
 /**
  *
  * @author Huelton
  */
 public class JfrmPrincipal extends javax.swing.JFrame {
-
+     
+    ConectaBanco conexao  = new ConectaBanco();
     /**
      * Creates new form JfrmPrincipal
      */
     public JfrmPrincipal() {
         initComponents();
+        conexao.conecta();
     }
 
     /**
@@ -29,30 +33,90 @@ public class JfrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMCadastro = new javax.swing.JMenu();
+        jMItemEstado = new javax.swing.JMenuItem();
+        jMItemCidade = new javax.swing.JMenuItem();
+        jMItemBairro = new javax.swing.JMenuItem();
+        jMItemTelefone = new javax.swing.JMenuItem();
+        jMItemClientes = new javax.swing.JMenuItem();
+        jMItemFornecedores = new javax.swing.JMenuItem();
+        jMItemProdutos = new javax.swing.JMenuItem();
+        jMCompra = new javax.swing.JMenu();
+        jMVenda = new javax.swing.JMenu();
+        jMRelatorio = new javax.swing.JMenu();
+        jMSair = new javax.swing.JMenu();
 
         jButton1.setText("jButton1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema de Vendas");
+        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        jMCadastro.setText("Cadastro");
+
+        jMItemEstado.setText("Estado");
+        jMCadastro.add(jMItemEstado);
+
+        jMItemCidade.setText("Cidade");
+        jMCadastro.add(jMItemCidade);
+
+        jMItemBairro.setText("Bairro");
+        jMCadastro.add(jMItemBairro);
+
+        jMItemTelefone.setText("Telefone");
+        jMCadastro.add(jMItemTelefone);
+
+        jMItemClientes.setText("Clientes");
+        jMCadastro.add(jMItemClientes);
+
+        jMItemFornecedores.setText("Fornecedores");
+        jMCadastro.add(jMItemFornecedores);
+
+        jMItemProdutos.setText("Produtos");
+        jMCadastro.add(jMItemProdutos);
+
+        jMenuBar1.add(jMCadastro);
+
+        jMCompra.setText("Compra");
+        jMenuBar1.add(jMCompra);
+
+        jMVenda.setText("Venda");
+        jMenuBar1.add(jMVenda);
+
+        jMRelatorio.setText("Relatorio");
+        jMenuBar1.add(jMRelatorio);
+
+        jMSair.setText("Sair");
+        jMSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMSairMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMSair);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(jButton1)
-                .addContainerGap(219, Short.MAX_VALUE))
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(147, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(130, 130, 130))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMSairMouseClicked
+        // TODO add your handling code here:
+        conexao.desconecta();
+        System.exit(0);
+    }//GEN-LAST:event_jMSairMouseClicked
 
     /**
      * @param args the command line arguments
@@ -91,5 +155,18 @@ public class JfrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMCadastro;
+    private javax.swing.JMenu jMCompra;
+    private javax.swing.JMenuItem jMItemBairro;
+    private javax.swing.JMenuItem jMItemCidade;
+    private javax.swing.JMenuItem jMItemClientes;
+    private javax.swing.JMenuItem jMItemEstado;
+    private javax.swing.JMenuItem jMItemFornecedores;
+    private javax.swing.JMenuItem jMItemProdutos;
+    private javax.swing.JMenuItem jMItemTelefone;
+    private javax.swing.JMenu jMRelatorio;
+    private javax.swing.JMenu jMSair;
+    private javax.swing.JMenu jMVenda;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
