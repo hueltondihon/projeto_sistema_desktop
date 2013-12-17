@@ -18,15 +18,21 @@ import javax.swing.JOptionPane;
  * @author Huelton
  */
 public class FrmEstado extends javax.swing.JFrame {
-    ConectaBanco conexao = new ConectaBanco();
+    ConectaBanco conexao = new ConectaBanco(); // instancia a classe de conexao do banco
     /**
      * Creates new form FrmEstado
      */
     public FrmEstado() {       
-        initComponents();
-        conexao.conecta();
-        
-        jTFCodigoEstado.setEnabled(false);
+                initComponents();
+                conexao.conecta(); // abre a conexao do banco dentro da janela
+
+                jTFCodigoEstado.setEnabled(false); // campo desabilitados quando a janela e aberta
+                jTFNomeEstado.setEnabled(false);
+                jTFSigla.setEnabled(false);
+
+                jBCadastroEstadoSalvar.setEnabled(false);    // DESABILITA OS BOTOES  quando a janela e aberta
+                jBCadastroEstadoAlterar.setEnabled(false);
+                jBCadastroEstadoExcluir.setEnabled(false);
     }
 
     /**
@@ -52,6 +58,10 @@ public class FrmEstado extends javax.swing.JFrame {
         jBCadastroEstadoAlterar = new javax.swing.JButton();
         jBCadastroEstadoExcluir = new javax.swing.JButton();
         jBCadastroEstadoSair = new javax.swing.JButton();
+        jBPrimeiro = new javax.swing.JButton();
+        jBUltimo = new javax.swing.JButton();
+        jBAnterior = new javax.swing.JButton();
+        jBProximo = new javax.swing.JButton();
         titulo_cadastro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -62,14 +72,26 @@ public class FrmEstado extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
 
+        jLCodigoEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLCodigoEstado.setText("Codigo:");
 
+        jLNomeEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLNomeEstado.setText("Nome Estado:");
 
+        jLSigla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLSigla.setText("Sigla:");
+
+        jTFCodigoEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jTFNomeEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFNomeEstado.setToolTipText("Digite o nome do Estado");
+
+        jTFSigla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFSigla.setToolTipText("Digite e sigla do Estado");
 
         jBCadastroEstadoNovo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_inserir1.png")); // NOI18N
         jBCadastroEstadoNovo.setToolTipText("Novo Cadastro");
+        jBCadastroEstadoNovo.setPreferredSize(new java.awt.Dimension(70, 48));
         jBCadastroEstadoNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastroEstadoNovoActionPerformed(evt);
@@ -91,6 +113,7 @@ public class FrmEstado extends javax.swing.JFrame {
 
         jBCadastroEstadoSalvar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_salvar2.png")); // NOI18N
         jBCadastroEstadoSalvar.setToolTipText("Salvar Cadastro");
+        jBCadastroEstadoSalvar.setPreferredSize(new java.awt.Dimension(70, 48));
         jBCadastroEstadoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastroEstadoSalvarActionPerformed(evt);
@@ -99,6 +122,7 @@ public class FrmEstado extends javax.swing.JFrame {
 
         jBCadastroEstadoAlterar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_atualizar3.png")); // NOI18N
         jBCadastroEstadoAlterar.setToolTipText("Alterar Cadastro");
+        jBCadastroEstadoAlterar.setPreferredSize(new java.awt.Dimension(60, 40));
 
         jBCadastroEstadoExcluir.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_deletar4.png")); // NOI18N
         jBCadastroEstadoExcluir.setToolTipText("Excluir Cadastro");
@@ -110,42 +134,84 @@ public class FrmEstado extends javax.swing.JFrame {
 
         jBCadastroEstadoSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_sair5.png")); // NOI18N
         jBCadastroEstadoSair.setToolTipText("Sair da Pagina");
+        jBCadastroEstadoSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastroEstadoSairActionPerformed(evt);
+            }
+        });
+
+        jBPrimeiro.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\primeiro.png")); // NOI18N
+        jBPrimeiro.setToolTipText("Primeiro");
+        jBPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPrimeiroActionPerformed(evt);
+            }
+        });
+
+        jBUltimo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\ultimo.png")); // NOI18N
+        jBUltimo.setToolTipText("Ultimo");
+        jBUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBUltimoActionPerformed(evt);
+            }
+        });
+
+        jBAnterior.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\anterior.png")); // NOI18N
+        jBAnterior.setToolTipText("Anterior");
+        jBAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAnteriorActionPerformed(evt);
+            }
+        });
+
+        jBProximo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\proximo.png")); // NOI18N
+        jBProximo.setToolTipText("Proximo");
+        jBProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBProximoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLCodigoEstado)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTFCodigoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLNomeEstado)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTFNomeEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(33, 33, 33)
-                                .addComponent(jLSigla)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jBCadastroEstadoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLCodigoEstado)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBCadastroEstadoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTFCodigoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLNomeEstado)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBCadastroEstadoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBCadastroEstadoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBCadastroEstadoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                                .addComponent(jTFNomeEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLSigla)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTFSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jBCadastroEstadoNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jBCadastroEstadoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jBCadastroEstadoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jBCadastroEstadoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jBPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jBAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jBUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jBCadastroEstadoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
@@ -157,28 +223,25 @@ public class FrmEstado extends javax.swing.JFrame {
                     .addComponent(jLCodigoEstado)
                     .addComponent(jTFCodigoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLNomeEstado)
-                            .addComponent(jTFNomeEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLSigla)
-                            .addComponent(jTFSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBCadastroEstadoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jBCadastroEstadoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jBCadastroEstadoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jBCadastroEstadoNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jBCadastroEstadoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNomeEstado)
+                    .addComponent(jTFNomeEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLSigla)
+                    .addComponent(jTFSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBProximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBPrimeiro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCadastroEstadoExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCadastroEstadoAlterar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCadastroEstadoSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                    .addComponent(jBCadastroEstadoNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCadastroEstadoSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGap(215, 215, 215))
         );
 
         titulo_cadastro.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -215,21 +278,39 @@ public class FrmEstado extends javax.swing.JFrame {
     private void jBCadastroEstadoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoSalvarActionPerformed
         try {
             PreparedStatement pst = conexao.conn.prepareStatement("INSERT INTO estado(nome_estado,sigla_estado) VALUES(?,?)");
-            pst.setString(1,jTFNomeEstado.getText());//pega o nome de estado do textfield
-            pst.setString(2, jTFSigla.getText()); //pega a sigla de estado dotextfield
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Inserido com sucesso ao Banco!");
-        } catch (SQLException ex) {
+            if (jTFNomeEstado.getText().equals("") && jTFSigla.getText().equals("")) {
+                 JOptionPane.showMessageDialog(null, "O campo Estado ou Sigla estao em branco, por favor preencha todos os campos!");
+            } else {
+                   pst.setString(1,jTFNomeEstado.getText());//pega o nome de estado do textfield
+                   pst.setString(2, jTFSigla.getText()); //pega a sigla de estado dotextfield
+                   pst.executeUpdate();
+                   JOptionPane.showMessageDialog(null, "Inserido com sucesso ao Banco!");
+            
+                jTFCodigoEstado.setEnabled(false);
+                jTFCodigoEstado.setText("");
+                jTFNomeEstado.setText("");
+                jTFSigla.setText("");
+        
+                jBCadastroEstadoSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+                jBCadastroEstadoAlterar.setEnabled(false);
+                jBCadastroEstadoExcluir.setEnabled(false);
+                jBCadastroEstadoNovo.setEnabled(true);
+              }            
+                
+            }catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Erro ao  inserir um Estado no Banco\n Erro: "+ex.getMessage());
-        }
+        } 
         
     }//GEN-LAST:event_jBCadastroEstadoSalvarActionPerformed
 
     private void jBCadastroEstadoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoExcluirActionPerformed
         try {   
             PreparedStatement pst = conexao.conn.prepareStatement("DELETE FROM estado WHERE sigla_estado = '"+jTFSigla.getText()+"'");
-            
-            int response = JOptionPane.showConfirmDialog(
+            if(jTFSigla.getText().equals("")){
+             JOptionPane.showMessageDialog(null, "o campo esta em branco!");
+             jTFCodigoEstado.setEnabled(false);
+            }else{
+                int response = JOptionPane.showConfirmDialog(
                     this," Voce quer deletar esse arquivo?", null,
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
@@ -237,22 +318,116 @@ public class FrmEstado extends javax.swing.JFrame {
             {
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Deletado com sucesso do Banco!");
+                
+                jTFCodigoEstado.setEnabled(true);
+                jTFCodigoEstado.setText("");
+                jTFNomeEstado.setText("");
+                jTFSigla.setText("");
+                
+                jBCadastroEstadoSalvar.setEnabled(false);    // DESABILITA OS BOTOES  
+                jBCadastroEstadoAlterar.setEnabled(false);
+                jBCadastroEstadoExcluir.setEnabled(false);
+                jBCadastroEstadoNovo.setEnabled(true);       
             }         
             
-        } catch (SQLException ex) {
+        } 
+      }catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Erro ao deletar um Estado no Banco\n Erro: "+ex.getMessage());
-        }
-        
-         jTFCodigoEstado.setEnabled(true);
-         jTFCodigoEstado.setText("");
-         jTFNomeEstado.setText("");
-         jTFSigla.setText("");        
+        }                
                          
     }//GEN-LAST:event_jBCadastroEstadoExcluirActionPerformed
 
     private void jBCadastroEstadoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoNovoActionPerformed
-        // TODO add your handling code here:
+       
+                jTFNomeEstado.setEnabled(true);
+                jTFSigla.setEnabled(true);
+
+                jBCadastroEstadoSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
+                jBCadastroEstadoAlterar.setEnabled(true);
+                jBCadastroEstadoExcluir.setEnabled(true);
+                jBCadastroEstadoNovo.setEnabled(false);
     }//GEN-LAST:event_jBCadastroEstadoNovoActionPerformed
+
+    private void jBCadastroEstadoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoSairActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        
+    }//GEN-LAST:event_jBCadastroEstadoSairActionPerformed
+
+    private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
+         try{
+            conexao.executaSQL("SELECT * FROM estado");            
+            conexao.rs.next();//            
+//                jTFCodigoEstado.setEnabled(true); // campo desabilitados quando a janela e aberta
+//                jTFNomeEstado.setEnabled(true);
+//                jTFSigla.setEnabled(true);
+            
+                         
+             jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
+             jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+             jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+             
+        }catch( SQLException ex){
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_jBProximoActionPerformed
+
+    private void jBPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimeiroActionPerformed
+        try{
+            conexao.executaSQL("SELECT * FROM estado");            
+            conexao.rs.first();
+//            
+//                jTFCodigoEstado.setEnabled(true); // campo desabilitados quando a janela e aberta
+//                jTFNomeEstado.setEnabled(true);
+//                jTFSigla.setEnabled(true);
+            
+                         
+             jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
+             jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+             jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+             
+        }catch( SQLException ex){
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_jBPrimeiroActionPerformed
+
+    private void jBUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUltimoActionPerformed
+         try{
+            conexao.executaSQL("SELECT * FROM estado");            
+            conexao.rs.last();
+//            
+//                jTFCodigoEstado.setEnabled(true); // campo desabilitados quando a janela e aberta
+//                jTFNomeEstado.setEnabled(true);
+//                jTFSigla.setEnabled(true);
+            
+                         
+             jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
+             jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+             jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+             
+        }catch( SQLException ex){
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_jBUltimoActionPerformed
+
+    private void jBAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnteriorActionPerformed
+         try{
+            conexao.executaSQL("SELECT * FROM estado");            
+            conexao.rs.previous();
+//            
+//                jTFCodigoEstado.setEnabled(true); // campo desabilitados quando a janela e aberta
+//                jTFNomeEstado.setEnabled(true);
+//                jTFSigla.setEnabled(true);
+            
+                         
+             jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
+             jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+             jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+             
+        }catch( SQLException ex){
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_jBAnteriorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,11 +465,15 @@ public class FrmEstado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAnterior;
     private javax.swing.JButton jBCadastroEstadoAlterar;
     private javax.swing.JButton jBCadastroEstadoExcluir;
     private javax.swing.JButton jBCadastroEstadoNovo;
     private javax.swing.JButton jBCadastroEstadoSair;
     private javax.swing.JButton jBCadastroEstadoSalvar;
+    private javax.swing.JButton jBPrimeiro;
+    private javax.swing.JButton jBProximo;
+    private javax.swing.JButton jBUltimo;
     private javax.swing.JLabel jLCodigoEstado;
     private javax.swing.JLabel jLNomeEstado;
     private javax.swing.JLabel jLSigla;
