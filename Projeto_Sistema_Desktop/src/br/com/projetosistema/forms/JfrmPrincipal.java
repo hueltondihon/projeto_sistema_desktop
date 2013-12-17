@@ -48,12 +48,18 @@ public class JfrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
+        setBackground(new java.awt.Color(227, 227, 243));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         jMCadastro.setText("Cadastro");
 
         jMItemEstado.setText("Estado");
+        jMItemEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMItemEstadoActionPerformed(evt);
+            }
+        });
         jMCadastro.add(jMItemEstado);
 
         jMItemCidade.setText("Cidade");
@@ -103,7 +109,7 @@ public class JfrmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 479, Short.MAX_VALUE)
         );
 
         pack();
@@ -115,6 +121,11 @@ public class JfrmPrincipal extends javax.swing.JFrame {
         conexao.desconecta();
         System.exit(0);
     }//GEN-LAST:event_jMSairMouseClicked
+
+    private void jMItemEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMItemEstadoActionPerformed
+        FrmEstado frmEstado = new FrmEstado(); 
+        frmEstado.setVisible(true);
+    }//GEN-LAST:event_jMItemEstadoActionPerformed
 
     /**
      * @param args the command line arguments

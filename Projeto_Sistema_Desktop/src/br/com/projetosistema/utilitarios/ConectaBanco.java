@@ -25,10 +25,20 @@ public class ConectaBanco {
        try {
            System.setProperty("jdbc.Drivers", driver);
            conn = DriverManager.getConnection(caminho, usuario, senha);
-           JOptionPane.showMessageDialog(null, "Conectado com Suceso!");
+           //JOptionPane.showMessageDialog(null, "Conectado com Suceso!");
        } catch (SQLException ex) {
           JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco,\n Erro: "+ex.getMessage());
        }
+   }
+   
+   public void executaSQL(String sql){
+       try {
+           stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE,rs.CONCUR_READ_ONLY);
+           rs =  stm.executeQuery(sql);           
+       } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro na execucao de SQL!\n Erro: "+ex.getMessage());
+       }
+       
    }
    
    public void desconecta(){ // metodo responsavel por desconectar do banco
