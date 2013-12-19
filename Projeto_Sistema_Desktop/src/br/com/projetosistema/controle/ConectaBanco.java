@@ -1,4 +1,4 @@
-package br.com.projetosistema.utilitarios;
+package br.com.projetosistema.controle;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,7 +44,7 @@ public class ConectaBanco {
    public void desconecta(){ // metodo responsavel por desconectar do banco
        try {
            conn.close();
-            JOptionPane.showMessageDialog(null, "Desconectado do Banco!");
+//         JOptionPane.showMessageDialog(null, "Desconectado do Banco!");
        } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Erro ao fechar o Banco,\n Erro: "+ex.getMessage());
        }

@@ -4,14 +4,17 @@
  * and open the template in the editor.
  */
 
-package br.com.projetosistema.forms;
+package br.com.projetosistema.visao;
 
-import br.com.projetosistema.utilitarios.ConectaBanco;
+import br.com.projetosistema.controle.ConectaBanco;
+import br.com.projetosistema.controle.ModeloTabela;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -25,6 +28,7 @@ public class FrmEstado extends javax.swing.JFrame {
     public FrmEstado() {       
                 initComponents();
                 conexao.conecta(); // abre a conexao do banco dentro da janela
+                preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
 
                 jTFCodigoEstado.setEnabled(false); // campo desabilitados quando a janela e aberta
                 jTFNomeEstado.setEnabled(false);
@@ -67,6 +71,7 @@ public class FrmEstado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Estados");
         setPreferredSize(new java.awt.Dimension(800, 500));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(227, 227, 243));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -98,15 +103,16 @@ public class FrmEstado extends javax.swing.JFrame {
             }
         });
 
+        jTableEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTableEstado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTableEstado);
@@ -123,6 +129,11 @@ public class FrmEstado extends javax.swing.JFrame {
         jBCadastroEstadoAlterar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_atualizar3.png")); // NOI18N
         jBCadastroEstadoAlterar.setToolTipText("Alterar Cadastro");
         jBCadastroEstadoAlterar.setPreferredSize(new java.awt.Dimension(60, 40));
+        jBCadastroEstadoAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastroEstadoAlterarActionPerformed(evt);
+            }
+        });
 
         jBCadastroEstadoExcluir.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_deletar4.png")); // NOI18N
         jBCadastroEstadoExcluir.setToolTipText("Excluir Cadastro");
@@ -165,7 +176,6 @@ public class FrmEstado extends javax.swing.JFrame {
         });
 
         jBProximo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\proximo.png")); // NOI18N
-        jBProximo.setToolTipText("Proximo");
         jBProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBProximoActionPerformed(evt);
@@ -207,13 +217,13 @@ public class FrmEstado extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jBAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jBUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jBCadastroEstadoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,8 +240,8 @@ public class FrmEstado extends javax.swing.JFrame {
                     .addComponent(jTFSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBProximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBProximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBPrimeiro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCadastroEstadoExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCadastroEstadoAlterar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -239,9 +249,9 @@ public class FrmEstado extends javax.swing.JFrame {
                     .addComponent(jBCadastroEstadoNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCadastroEstadoSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(215, 215, 215))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
 
         titulo_cadastro.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -254,12 +264,12 @@ public class FrmEstado extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(203, 203, 203)
                 .addComponent(titulo_cadastro)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,8 +277,8 @@ public class FrmEstado extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titulo_cadastro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(277, 277, 277))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
         );
 
         pack();
@@ -277,7 +287,7 @@ public class FrmEstado extends javax.swing.JFrame {
 
     private void jBCadastroEstadoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoSalvarActionPerformed
         try {
-            PreparedStatement pst = conexao.conn.prepareStatement("INSERT INTO estado(nome_estado,sigla_estado) VALUES(?,?)");
+            PreparedStatement pst = conexao.conn.prepareStatement("INSERT INTO tb_estados(nome_estado,sigla_estado) VALUES(?,?)");
             if (jTFNomeEstado.getText().equals("") && jTFSigla.getText().equals("")) {
                  JOptionPane.showMessageDialog(null, "O campo Estado ou Sigla estao em branco, por favor preencha todos os campos!");
             } else {
@@ -285,7 +295,8 @@ public class FrmEstado extends javax.swing.JFrame {
                    pst.setString(2, jTFSigla.getText()); //pega a sigla de estado dotextfield
                    pst.executeUpdate();
                    JOptionPane.showMessageDialog(null, "Inserido com sucesso ao Banco!");
-            
+                   preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
+                   
                 jTFCodigoEstado.setEnabled(false);
                 jTFCodigoEstado.setText("");
                 jTFNomeEstado.setText("");
@@ -305,7 +316,7 @@ public class FrmEstado extends javax.swing.JFrame {
 
     private void jBCadastroEstadoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoExcluirActionPerformed
         try {   
-            PreparedStatement pst = conexao.conn.prepareStatement("DELETE FROM estado WHERE sigla_estado = '"+jTFSigla.getText()+"'");
+            PreparedStatement pst = conexao.conn.prepareStatement("DELETE FROM tb_estados WHERE sigla_estado = '"+jTFSigla.getText()+"'");
             if(jTFSigla.getText().equals("")){
              JOptionPane.showMessageDialog(null, "o campo esta em branco!");
              jTFCodigoEstado.setEnabled(false);
@@ -318,6 +329,7 @@ public class FrmEstado extends javax.swing.JFrame {
             {
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Deletado com sucesso do Banco!");
+                preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado"); 
                 
                 jTFCodigoEstado.setEnabled(true);
                 jTFCodigoEstado.setText("");
@@ -338,9 +350,14 @@ public class FrmEstado extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastroEstadoExcluirActionPerformed
 
     private void jBCadastroEstadoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoNovoActionPerformed
-       
+                
+                jTFCodigoEstado.setEnabled(false);
                 jTFNomeEstado.setEnabled(true);
                 jTFSigla.setEnabled(true);
+                
+                jTFCodigoEstado.setText("");
+                jTFNomeEstado.setText("");
+                jTFSigla.setText("");
 
                 jBCadastroEstadoSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
                 jBCadastroEstadoAlterar.setEnabled(true);
@@ -354,37 +371,23 @@ public class FrmEstado extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBCadastroEstadoSairActionPerformed
 
-    private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
-         try{
-            conexao.executaSQL("SELECT * FROM estado");            
-            conexao.rs.next();//            
-//                jTFCodigoEstado.setEnabled(true); // campo desabilitados quando a janela e aberta
-//                jTFNomeEstado.setEnabled(true);
-//                jTFSigla.setEnabled(true);
-            
-                         
-             jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
-             jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
-             jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
-        }
-    }//GEN-LAST:event_jBProximoActionPerformed
-
+    
+    
+    
     private void jBPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimeiroActionPerformed
+        jBCadastroEstadoAlterar.setEnabled(true); 
+        jBCadastroEstadoExcluir.setEnabled(true);
         try{
-            conexao.executaSQL("SELECT * FROM estado");            
-            conexao.rs.first();
-//            
-//                jTFCodigoEstado.setEnabled(true); // campo desabilitados quando a janela e aberta
-//                jTFNomeEstado.setEnabled(true);
-//                jTFSigla.setEnabled(true);
-            
-                         
-             jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
-             jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
-             jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+             conexao.executaSQL("select * from tb_estados ");            
+             conexao.rs.first();
+             
+                jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
+                jTFNomeEstado.setEnabled(true);
+                jTFSigla.setEnabled(true);
+             
+             jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id")));
+             jTFNomeEstado.setText(conexao.rs.getString("nome"));//mostra o nome de estado do textfield
+             jTFSigla.setText(conexao.rs.getString("uf")); //mostra a sigla de estado dotextfield         
              
         }catch( SQLException ex){
             JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
@@ -392,15 +395,16 @@ public class FrmEstado extends javax.swing.JFrame {
     }//GEN-LAST:event_jBPrimeiroActionPerformed
 
     private void jBUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUltimoActionPerformed
-         try{
-            conexao.executaSQL("SELECT * FROM estado");            
+        jBCadastroEstadoAlterar.setEnabled(true); 
+        jBCadastroEstadoExcluir.setEnabled(true);
+        try{
+            conexao.executaSQL("select * from tb_estados ");            
             conexao.rs.last();
-//            
-//                jTFCodigoEstado.setEnabled(true); // campo desabilitados quando a janela e aberta
-//                jTFNomeEstado.setEnabled(true);
-//                jTFSigla.setEnabled(true);
             
-                         
+                jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
+                jTFNomeEstado.setEnabled(true);
+                jTFSigla.setEnabled(true);
+            
              jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
              jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
              jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
@@ -411,15 +415,16 @@ public class FrmEstado extends javax.swing.JFrame {
     }//GEN-LAST:event_jBUltimoActionPerformed
 
     private void jBAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnteriorActionPerformed
-         try{
-            conexao.executaSQL("SELECT * FROM estado");            
-            conexao.rs.previous();
-//            
-//                jTFCodigoEstado.setEnabled(true); // campo desabilitados quando a janela e aberta
-//                jTFNomeEstado.setEnabled(true);
-//                jTFSigla.setEnabled(true);
+         jBCadastroEstadoAlterar.setEnabled(true); 
+         jBCadastroEstadoExcluir.setEnabled(true);
+        try{
+            //conexao.executaSQL("SELECT * FROM estado ");            
+            conexao.rs.previous();  
             
-                         
+             jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
+             jTFNomeEstado.setEnabled(true);
+             jTFSigla.setEnabled(true);
+            
              jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
              jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
              jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
@@ -429,6 +434,91 @@ public class FrmEstado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBAnteriorActionPerformed
 
+    private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
+        jBCadastroEstadoAlterar.setEnabled(true); 
+        jBCadastroEstadoExcluir.setEnabled(true);
+        try{
+             //conexao.executaSQL("select * from estado ");            
+             conexao.rs.next();
+             
+             jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
+             jTFNomeEstado.setEnabled(true);
+             jTFSigla.setEnabled(true);
+             
+             jTFCodigoEstado.setText(String.valueOf(conexao.rs.getInt("id_estado")));
+             jTFNomeEstado.setText(conexao.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+             jTFSigla.setText(conexao.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+             
+        }catch( SQLException ex){
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_jBProximoActionPerformed
+
+    private void jBCadastroEstadoAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoAlterarActionPerformed
+        // TODO add your handling code here:
+        try {
+            PreparedStatement pst = conexao.conn.prepareStatement("UPDATE tb_estados SET nome_estado = ?, sigla_estado = ? WHERE id_estado = ?");
+            if (jTFNomeEstado.getText().equals("") && jTFSigla.getText().equals("")) {
+                 JOptionPane.showMessageDialog(null, "O campo Estado ou Sigla estao em branco, por favor preencha todos os campos!");
+            } else {
+                   pst.setString(1,jTFNomeEstado.getText());//pega o nome de estado do textfield
+                   pst.setString(2, jTFSigla.getText()); //pega a sigla de estado dotextfield
+                   pst.setInt(3, Integer.parseInt(jTFCodigoEstado.getText())); //pega a sigla de estado do textfield TRANSFORMA EM UM INTEIRO
+                   pst.executeUpdate();
+                   JOptionPane.showMessageDialog(null, "Atualizado com sucesso ao Banco!");
+                   preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
+                   
+                jTFCodigoEstado.setEnabled(false);
+                jTFCodigoEstado.setText("");
+                jTFNomeEstado.setText("");
+                jTFSigla.setText("");
+        
+                jBCadastroEstadoSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+                jBCadastroEstadoAlterar.setEnabled(false);
+                jBCadastroEstadoExcluir.setEnabled(false);
+                jBCadastroEstadoNovo.setEnabled(true);
+              }            
+                
+            }catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro ao Atualizar os campos no Banco\n Erro: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_jBCadastroEstadoAlterarActionPerformed
+    
+    public void preencherTabela(String sql){
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"ID","Nome","Sigla"};
+        
+        conexao.executaSQL(sql);
+        try {
+            conexao.rs.first();            
+            do {            
+                 dados.add(new Object[]{conexao.rs.getInt("id_estado"),
+                                        conexao.rs.getString("nome_estado"),
+                                        conexao.rs.getString("sigla_estado")});
+               } while (conexao.rs.next());
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Erro ao Preencher dados na Tabela com o Banco de dados\n Erro: "+ex.getMessage()); 
+        }
+        
+        ModeloTabela modeloTabela = new ModeloTabela(dados, colunas);
+        jTableEstado.setModel(modeloTabela);
+        jTableEstado.getColumnModel().getColumn(0).setPreferredWidth(100); // configuracao de tamanho do campo
+        jTableEstado.getColumnModel().getColumn(0).setResizable(false); // redimensionamento da tabela nesse caso e falso
+        
+        jTableEstado.getColumnModel().getColumn(1).setPreferredWidth(440); // configuracao de tamanho do campo
+        jTableEstado.getColumnModel().getColumn(1).setResizable(true); // redimensionamento da tabela nesse caso e true
+        
+        jTableEstado.getColumnModel().getColumn(2).setPreferredWidth(150); // configuracao de tamanho do campo
+        jTableEstado.getColumnModel().getColumn(2).setResizable(false); // redimensionamento da tabela nesse caso e true
+        
+        jTableEstado.getTableHeader().setReorderingAllowed(false); // nao faz reordenacao
+        jTableEstado.setAutoResizeMode(jTableEstado.AUTO_RESIZE_OFF);//nao e redimensionavel
+        jTableEstado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // posso selecionar somente um campo
+    }
+     
+                                          
+   
+    
     /**
      * @param args the command line arguments
      */

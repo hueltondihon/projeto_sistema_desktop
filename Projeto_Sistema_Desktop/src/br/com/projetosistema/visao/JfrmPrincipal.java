@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package br.com.projetosistema.forms;
+package br.com.projetosistema.visao;
 
-import br.com.projetosistema.utilitarios.ConectaBanco;
+import br.com.projetosistema.controle.ConectaBanco;
 
 /**
  *
@@ -50,10 +50,12 @@ public class JfrmPrincipal extends javax.swing.JFrame {
         setTitle("Sistema de Vendas");
         setBackground(new java.awt.Color(227, 227, 243));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setIconImages(null);
 
         jMCadastro.setText("Cadastro");
+        jMCadastro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
+        jMItemEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMItemEstado.setText("Estado");
         jMItemEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,36 +64,51 @@ public class JfrmPrincipal extends javax.swing.JFrame {
         });
         jMCadastro.add(jMItemEstado);
 
+        jMItemCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMItemCidade.setText("Cidade");
+        jMItemCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMItemCidadeActionPerformed(evt);
+            }
+        });
         jMCadastro.add(jMItemCidade);
 
+        jMItemBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMItemBairro.setText("Bairro");
         jMCadastro.add(jMItemBairro);
 
+        jMItemTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMItemTelefone.setText("Telefone");
         jMCadastro.add(jMItemTelefone);
 
+        jMItemClientes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMItemClientes.setText("Clientes");
         jMCadastro.add(jMItemClientes);
 
+        jMItemFornecedores.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMItemFornecedores.setText("Fornecedores");
         jMCadastro.add(jMItemFornecedores);
 
+        jMItemProdutos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMItemProdutos.setText("Produtos");
         jMCadastro.add(jMItemProdutos);
 
         jMenuBar1.add(jMCadastro);
 
         jMCompra.setText("Compra");
+        jMCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuBar1.add(jMCompra);
 
         jMVenda.setText("Venda");
+        jMVenda.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuBar1.add(jMVenda);
 
         jMRelatorio.setText("Relatorio");
+        jMRelatorio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuBar1.add(jMRelatorio);
 
         jMSair.setText("Sair");
+        jMSair.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMSairMouseClicked(evt);
@@ -126,6 +143,11 @@ public class JfrmPrincipal extends javax.swing.JFrame {
         FrmEstado frmEstado = new FrmEstado(); 
         frmEstado.setVisible(true);
     }//GEN-LAST:event_jMItemEstadoActionPerformed
+
+    private void jMItemCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMItemCidadeActionPerformed
+        FrmCidade frmCidade = new FrmCidade(); 
+        frmCidade.setVisible(true);
+    }//GEN-LAST:event_jMItemCidadeActionPerformed
 
     /**
      * @param args the command line arguments
