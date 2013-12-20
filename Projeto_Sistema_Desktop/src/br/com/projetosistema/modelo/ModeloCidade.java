@@ -1,6 +1,5 @@
 package br.com.projetosistema.modelo;
 
-
 public class ModeloCidade {
     
     private int idCidade;

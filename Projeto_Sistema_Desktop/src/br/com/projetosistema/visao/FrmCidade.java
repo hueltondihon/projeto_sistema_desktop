@@ -35,7 +35,7 @@ public class FrmCidade extends javax.swing.JFrame {
                 
                  conexaoEstado.conecta(); // abre a conexao do banco dentro da janela
                   conexaoCidade.conecta(); 
-                 preencherTabela("SELECT id_cidade,id_estado,uf,nome_cidade FROM tb_cidades ORDER BY id_cidade");
+                 preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
                  conexaoEstado.executaSQL("SELECT * FROM tb_estados ORDER BY nome_estado ");
                  jCBoxEstado.removeAllItems(); //remove todos os itens ue nao sao ligados ao banco de dados          
                                   
@@ -86,6 +86,7 @@ public class FrmCidade extends javax.swing.JFrame {
         jBAnterior = new javax.swing.JButton();
         jBProximo = new javax.swing.JButton();
         jCBoxEstado = new javax.swing.JComboBox();
+        jBCadastroCidadeLimpar = new javax.swing.JButton();
         titulo_cadastro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -107,9 +108,10 @@ public class FrmCidade extends javax.swing.JFrame {
         jLEstado.setText("Estado");
 
         jTFCodigoCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFCodigoCidade.setToolTipText("Codigo da Cidade");
 
         jTFNomeCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTFNomeCidade.setToolTipText("Digite o nome do Estado");
+        jTFNomeCidade.setToolTipText("Nome do Cidade");
 
         jBCadastroCidadeNovo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_inserir1.png")); // NOI18N
         jBCadastroCidadeNovo.setToolTipText("Novo Cadastro");
@@ -160,7 +162,7 @@ public class FrmCidade extends javax.swing.JFrame {
             }
         });
 
-        jBCadastroCidadeSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_sair5.png")); // NOI18N
+        jBCadastroCidadeSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_sair6.png")); // NOI18N
         jBCadastroCidadeSair.setToolTipText("Sair da Pagina");
         jBCadastroCidadeSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,13 +195,24 @@ public class FrmCidade extends javax.swing.JFrame {
         });
 
         jBProximo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\proximo.png")); // NOI18N
+        jBProximo.setToolTipText("Proximo");
         jBProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBProximoActionPerformed(evt);
             }
         });
 
+        jCBoxEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jCBoxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBoxEstado.setToolTipText("Lista das Estados");
+
+        jBCadastroCidadeLimpar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_limpar5.png")); // NOI18N
+        jBCadastroCidadeLimpar.setToolTipText("Limpa os Campos");
+        jBCadastroCidadeLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastroCidadeLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -208,6 +221,7 @@ public class FrmCidade extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -221,28 +235,29 @@ public class FrmCidade extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(jLEstado)
                         .addGap(18, 18, 18)
-                        .addComponent(jCBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jBCadastroCidadeNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jBCadastroCidadeSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jBCadastroCidadeAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jBCadastroCidadeExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jBPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jBCadastroCidadeSair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jCBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBCadastroCidadeNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBCadastroCidadeSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBCadastroCidadeAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBCadastroCidadeExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBCadastroCidadeLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(jBPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBCadastroCidadeSair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +272,7 @@ public class FrmCidade extends javax.swing.JFrame {
                     .addComponent(jTFNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLEstado)
                     .addComponent(jCBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBProximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -267,10 +282,11 @@ public class FrmCidade extends javax.swing.JFrame {
                     .addComponent(jBCadastroCidadeSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                     .addComponent(jBCadastroCidadeNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBCadastroCidadeSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBCadastroCidadeSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCadastroCidadeLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
 
         titulo_cadastro.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -281,14 +297,13 @@ public class FrmCidade extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(203, 203, 203)
                 .addComponent(titulo_cadastro)
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,7 +330,7 @@ public class FrmCidade extends javax.swing.JFrame {
             } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: "+ex.getMessage());
         }
-         preencherTabela("SELECT id_cidade,uf,nome_cidade FROM tb_cidades ORDER BY id_cidade");
+         preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
     }//GEN-LAST:event_jBCadastroCidadeSalvarActionPerformed
 
     private void jBCadastroCidadeExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeExcluirActionPerformed
@@ -341,7 +356,7 @@ public class FrmCidade extends javax.swing.JFrame {
        } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: "+ex.getMessage());
         }
-         preencherTabela("SELECT id_cidade,uf,nome_cidade FROM tb_cidades ORDER BY id_cidade");                 
+         preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");                 
     }//GEN-LAST:event_jBCadastroCidadeExcluirActionPerformed
 
     private void jBCadastroCidadeNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeNovoActionPerformed
@@ -372,6 +387,8 @@ public class FrmCidade extends javax.swing.JFrame {
     private void jBPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimeiroActionPerformed
         jBCadastroCidadeAlterar.setEnabled(true); 
         jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeLimpar.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
         try{
              conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY id_cidade");            
              conexaoCidade.rs.first();
@@ -398,6 +415,8 @@ public class FrmCidade extends javax.swing.JFrame {
     private void jBUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUltimoActionPerformed
         jBCadastroCidadeAlterar.setEnabled(true); 
         jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeLimpar.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
       try{
              conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY id_cidade");            
              conexaoCidade.rs.last();
@@ -422,8 +441,10 @@ public class FrmCidade extends javax.swing.JFrame {
     }//GEN-LAST:event_jBUltimoActionPerformed
 
     private void jBAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnteriorActionPerformed
-         jBCadastroCidadeAlterar.setEnabled(true); 
-         jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeAlterar.setEnabled(true); 
+        jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeLimpar.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
         try{
              //conexaoCidade.executaSQL("SELECT * FROM cidade ORDER BY id_cidade");            
              conexaoCidade.rs.previous();
@@ -450,6 +471,8 @@ public class FrmCidade extends javax.swing.JFrame {
     private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
         jBCadastroCidadeAlterar.setEnabled(true); 
         jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeLimpar.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
         try{
              //conexaoCidade.executaSQL("SELECT * FROM cidade ORDER BY id_cidade");            
              conexaoCidade.rs.next();
@@ -475,6 +498,7 @@ public class FrmCidade extends javax.swing.JFrame {
 
     private void jBCadastroCidadeAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeAlterarActionPerformed
         // TODO add your handling code here:
+               
         try{
             modeloCidade.setIdCidade(Integer.parseInt(jTFCodigoCidade.getText()));
             modeloCidade.setNomeCidade(jTFNomeCidade.getText());
@@ -486,20 +510,37 @@ public class FrmCidade extends javax.swing.JFrame {
             } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: "+ex.getMessage());
         }
-         preencherTabela("SELECT id_cidade,uf,nome_cidade FROM tb_cidades ORDER BY id_cidade");
+         preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
     }//GEN-LAST:event_jBCadastroCidadeAlterarActionPerformed
+
+    private void jBCadastroCidadeLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeLimparActionPerformed
+        // TODO add your handling code here:
+                jTFCodigoCidade.setEnabled(false);
+                jTFNomeCidade.setEnabled(false);
+                jCBoxEstado.setEnabled(false);
+                
+                jTFCodigoCidade.setText("");
+                jTFNomeCidade.setText("");
+                jCBoxEstado.addItem("");
+
+                jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+                jBCadastroCidadeAlterar.setEnabled(false);
+                jBCadastroCidadeExcluir.setEnabled(false);
+                jBCadastroCidadeNovo.setEnabled(true);
+    }//GEN-LAST:event_jBCadastroCidadeLimparActionPerformed
     
     public void preencherTabela(String sql){
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID","UF","Cidade"};
+        String[] colunas = new String[]{"ID","Cidade","Estado","UF"};
         
         conexaoCidade.executaSQL(sql);
         try {
             conexaoCidade.rs.first();            
             do {            
                  dados.add(new Object[]{conexaoCidade.rs.getInt("id_cidade"),
-                                        conexaoCidade.rs.getString("uf"),
-                                        conexaoCidade.rs.getString("nome_cidade")});
+                                        conexaoCidade.rs.getString("nome_cidade"),
+                                        conexaoCidade.rs.getString("nome_estado"),
+                                        conexaoCidade.rs.getString("uf")});
                } while (conexaoCidade.rs.next());
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Erro ao Preencher dados na Tabela com o Banco de dados\n Erro: "+ex.getMessage()); 
@@ -510,11 +551,14 @@ public class FrmCidade extends javax.swing.JFrame {
         jTableCidade.getColumnModel().getColumn(0).setPreferredWidth(100); // configuracao de tamanho do campo
         jTableCidade.getColumnModel().getColumn(0).setResizable(false); // redimensionamento da tabela nesse caso e falso
               
-        jTableCidade.getColumnModel().getColumn(1).setPreferredWidth(150); // configuracao de tamanho do campo
+        jTableCidade.getColumnModel().getColumn(1).setPreferredWidth(350); // configuracao de tamanho do campo
         jTableCidade.getColumnModel().getColumn(1).setResizable(false); // redimensionamento da tabela nesse caso e true
         
-        jTableCidade.getColumnModel().getColumn(2).setPreferredWidth(340); // configuracao de tamanho do campo
+        jTableCidade.getColumnModel().getColumn(2).setPreferredWidth(190); // configuracao de tamanho do campo
         jTableCidade.getColumnModel().getColumn(2).setResizable(true); // redimensionamento da tabela nesse caso e true
+        
+        jTableCidade.getColumnModel().getColumn(3).setPreferredWidth(100); // configuracao de tamanho do campo
+        jTableCidade.getColumnModel().getColumn(3).setResizable(true); // redimensionamento da tabela nesse caso e true
         
         jTableCidade.getTableHeader().setReorderingAllowed(false); // nao faz reordenacao
         jTableCidade.setAutoResizeMode(jTableCidade.AUTO_RESIZE_OFF);//nao e redimensionavel
@@ -554,7 +598,7 @@ public class FrmCidade extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCidade().setVisible(true);
+                new JfrmPrincipal().setVisible(true);
             }
         });
     }
@@ -563,6 +607,7 @@ public class FrmCidade extends javax.swing.JFrame {
     private javax.swing.JButton jBAnterior;
     private javax.swing.JButton jBCadastroCidadeAlterar;
     private javax.swing.JButton jBCadastroCidadeExcluir;
+    private javax.swing.JButton jBCadastroCidadeLimpar;
     private javax.swing.JButton jBCadastroCidadeNovo;
     private javax.swing.JButton jBCadastroCidadeSair;
     private javax.swing.JButton jBCadastroCidadeSalvar;

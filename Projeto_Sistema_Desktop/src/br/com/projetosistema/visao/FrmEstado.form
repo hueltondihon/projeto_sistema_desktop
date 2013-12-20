@@ -30,13 +30,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="748" max="32767" attributes="0"/>
+              <Component id="jPanel1" pref="758" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
               <Component id="titulo_cadastro" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="323" max="32767" attributes="0"/>
+              <EmptySpace pref="333" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,7 +76,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -95,28 +95,28 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jTFSigla" min="-2" pref="62" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jBCadastroEstadoNovo" min="-2" pref="67" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jBCadastroEstadoSalvar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jBCadastroEstadoAlterar" min="-2" pref="68" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jBCadastroEstadoExcluir" min="-2" pref="65" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jBPrimeiro" min="-2" pref="69" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jBAnterior" min="-2" pref="65" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jBProximo" min="-2" pref="63" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jBUltimo" min="-2" pref="65" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jBCadastroEstadoSair" min="-2" pref="65" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane1" min="-2" pref="714" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jBCadastroEstadoNovo" min="-2" pref="67" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBCadastroEstadoSalvar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBCadastroEstadoAlterar" min="-2" pref="68" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBCadastroEstadoExcluir" min="-2" pref="65" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBCadastroEstadoLimpar" min="-2" pref="69" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBPrimeiro" min="-2" pref="69" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBAnterior" min="-2" pref="65" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBProximo" min="-2" pref="63" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBUltimo" min="-2" pref="65" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jBCadastroEstadoSair" min="-2" pref="65" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -137,7 +137,7 @@
                       <Component id="jLSigla" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTFSigla" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace pref="31" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jBProximo" max="32767" attributes="0"/>
                       <Component id="jBUltimo" max="32767" attributes="0"/>
@@ -148,10 +148,11 @@
                       <Component id="jBCadastroEstadoNovo" alignment="1" max="32767" attributes="0"/>
                       <Component id="jBAnterior" alignment="1" max="32767" attributes="0"/>
                       <Component id="jBCadastroEstadoSair" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jBCadastroEstadoLimpar" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="168" max="-2" attributes="0"/>
-                  <EmptySpace pref="348" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="191" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="325" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -186,6 +187,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Codigo do Estado"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTFNomeEstado">
@@ -193,7 +195,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Digite o nome do Estado"/>
+            <Property name="toolTipText" type="java.lang.String" value="Nome do Estado"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTFSigla">
@@ -201,7 +203,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Digite e sigla do Estado"/>
+            <Property name="toolTipText" type="java.lang.String" value="Sigla do Estado"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jBCadastroEstadoNovo">
@@ -279,7 +281,7 @@
         <Component class="javax.swing.JButton" name="jBCadastroEstadoSair">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Huelton\Documents\GitHub\projeto_sistema_desktop\Projeto_Sistema_Desktop\src\imagem_projeto\cadastro_sair5.png"/>
+              <Image iconType="2" name="C:\Users\Huelton\Documents\GitHub\projeto_sistema_desktop\Projeto_Sistema_Desktop\src\imagem_projeto\cadastro_sair6.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Sair da Pagina"/>
           </Properties>
@@ -325,9 +327,21 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="C:\Users\Huelton\Documents\GitHub\projeto_sistema_desktop\Projeto_Sistema_Desktop\src\imagem_projeto\proximo.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Proximo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBProximoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBCadastroEstadoLimpar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Huelton\Documents\GitHub\projeto_sistema_desktop\Projeto_Sistema_Desktop\src\imagem_projeto\cadastro_limpar5.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Limpar Cadastro"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCadastroEstadoLimparActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
