@@ -97,19 +97,19 @@ public class FrmCidade extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jLCodigoCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLCodigoCidade.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLCodigoCidade.setText("Codigo:");
 
-        jLNomeCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLNomeCidade.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLNomeCidade.setText("Nome Cidade:");
 
-        jLEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLEstado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLEstado.setText("Estado");
 
-        jTFCodigoCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFCodigoCidade.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTFCodigoCidade.setToolTipText("Codigo da Cidade");
 
-        jTFNomeCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTFNomeCidade.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTFNomeCidade.setToolTipText("Nome do Cidade");
 
         jBCadastroCidadeNovo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Huelton\\Documents\\GitHub\\projeto_sistema_desktop\\Projeto_Sistema_Desktop\\src\\imagem_projeto\\cadastro_inserir1.png")); // NOI18N
@@ -121,7 +121,7 @@ public class FrmCidade extends javax.swing.JFrame {
             }
         });
 
-        jTableCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTableCidade.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTableCidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -201,7 +201,7 @@ public class FrmCidade extends javax.swing.JFrame {
             }
         });
 
-        jCBoxEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jCBoxEstado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jCBoxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCBoxEstado.setToolTipText("Lista das Estados");
 
@@ -218,23 +218,13 @@ public class FrmCidade extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLCodigoCidade)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTFCodigoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLNomeCidade)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTFNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(33, 33, 33)
-                        .addComponent(jLEstado)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLCodigoCidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTFCodigoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jBCadastroCidadeNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,7 +236,7 @@ public class FrmCidade extends javax.swing.JFrame {
                         .addComponent(jBCadastroCidadeExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBCadastroCidadeLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,8 +245,17 @@ public class FrmCidade extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBCadastroCidadeSair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+                        .addComponent(jBCadastroCidadeSair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLNomeCidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTFNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLEstado)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,24 +270,24 @@ public class FrmCidade extends javax.swing.JFrame {
                     .addComponent(jTFNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLEstado)
                     .addComponent(jCBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBProximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBProximo, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                     .addComponent(jBUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBPrimeiro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCadastroCidadeExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCadastroCidadeAlterar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBCadastroCidadeSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                    .addComponent(jBCadastroCidadeSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCadastroCidadeNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCadastroCidadeSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBCadastroCidadeLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
 
-        titulo_cadastro.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        titulo_cadastro.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         titulo_cadastro.setForeground(new java.awt.Color(36, 127, 194));
         titulo_cadastro.setText("Formulário Cadastro de Cidade ");
 
@@ -297,39 +296,31 @@ public class FrmCidade extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(titulo_cadastro)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(259, 259, 259)
+                        .addComponent(titulo_cadastro))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(titulo_cadastro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(420, 420, 420))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBCadastroCidadeSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeSalvarActionPerformed
-        try {
-            modeloCidade.setNomeCidade(jTFNomeCidade.getText());
-            conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE nome_estado = '" + jCBoxEstado.getSelectedItem() + "'");
-            conexaoEstado.rs.first();
-            modeloCidade.setIdEstado(conexaoEstado.rs.getInt("id_estado"));
-            controleCidade.inserirCidade(modeloCidade);
-            JOptionPane.showMessageDialog(null, "Dados Gravados com Sucesso!");
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: " + ex.getMessage());
-        }
+    private void jBCadastroCidadeLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeLimparActionPerformed
+        // TODO add your handling code here:
         jTFCodigoCidade.setEnabled(false);
         jTFNomeCidade.setEnabled(false);
         jCBoxEstado.setEnabled(false);
@@ -338,13 +329,117 @@ public class FrmCidade extends javax.swing.JFrame {
         jTFNomeCidade.setText("");
         jCBoxEstado.addItem("");
 
-        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES
         jBCadastroCidadeAlterar.setEnabled(false);
         jBCadastroCidadeExcluir.setEnabled(false);
-        jBCadastroCidadeLimpar.setEnabled(false);
         jBCadastroCidadeNovo.setEnabled(true);
-        preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
-    }//GEN-LAST:event_jBCadastroCidadeSalvarActionPerformed
+    }//GEN-LAST:event_jBCadastroCidadeLimparActionPerformed
+
+    private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
+        jBCadastroCidadeAlterar.setEnabled(true);
+        jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeLimpar.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
+        jTFNomeCidade.setEnabled(true);
+        try {
+            //conexaoCidade.executaSQL("SELECT * FROM cidade ORDER BY id_cidade");
+            conexaoCidade.rs.next();
+            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
+            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
+
+            //conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
+            //conexaoEstado.rs.next();
+            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
+
+            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeCidade.setEnabled(true);
+            jCBoxEstado.setEnabled(true);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBProximoActionPerformed
+
+    private void jBAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnteriorActionPerformed
+        jBCadastroCidadeAlterar.setEnabled(true);
+        jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeLimpar.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
+        jTFNomeCidade.setEnabled(true);
+        try {
+            //conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY id_cidade");
+            conexaoCidade.rs.previous();
+
+            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeCidade.setEnabled(true);
+            jCBoxEstado.setEnabled(true);
+
+            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
+            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
+
+            // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
+            //conexaoEstado.rs.previous();
+            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
+
+        } catch (SQLException ex) {
+
+        }
+    }//GEN-LAST:event_jBAnteriorActionPerformed
+
+    private void jBUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUltimoActionPerformed
+        jBCadastroCidadeAlterar.setEnabled(true);
+        jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeLimpar.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
+        jTFNomeCidade.setEnabled(true);
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
+            conexaoCidade.rs.last();
+            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
+            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
+
+            // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
+            //conexaoEstado.rs.last();
+            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
+
+            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeCidade.setEnabled(true);
+            jCBoxEstado.setEnabled(true);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBUltimoActionPerformed
+
+    private void jBPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimeiroActionPerformed
+        jBCadastroCidadeAlterar.setEnabled(true);
+        jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeLimpar.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
+        jTFNomeCidade.setEnabled(true);
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
+            conexaoCidade.rs.first();
+            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
+            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
+
+            // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
+            //conexaoEstado.rs.first();
+            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
+
+            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeCidade.setEnabled(true);
+            jCBoxEstado.setEnabled(true);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBPrimeiroActionPerformed
+
+    private void jBCadastroCidadeSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeSairActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jBCadastroCidadeSairActionPerformed
 
     private void jBCadastroCidadeExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeExcluirActionPerformed
         try {
@@ -356,9 +451,9 @@ public class FrmCidade extends javax.swing.JFrame {
                 jCBoxEstado.setEnabled(false);
             } else {
                 int response = JOptionPane.showConfirmDialog(
-                        this, " Voce quer deletar esse arquivo?", null,
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.WARNING_MESSAGE);
+                    this, " Voce quer deletar esse arquivo?", null,
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
                 if (response == JOptionPane.YES_OPTION) {
                     controleCidade.deletarCidade(modeloCidade);
                     JOptionPane.showMessageDialog(null, "Dados Deletados com Sucesso!");
@@ -377,7 +472,7 @@ public class FrmCidade extends javax.swing.JFrame {
         jTFNomeCidade.setText("");
         jCBoxEstado.addItem("");
 
-        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES
         jBCadastroCidadeAlterar.setEnabled(false);
         jBCadastroCidadeExcluir.setEnabled(false);
         jBCadastroCidadeLimpar.setEnabled(false);
@@ -385,132 +480,6 @@ public class FrmCidade extends javax.swing.JFrame {
 
         preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
     }//GEN-LAST:event_jBCadastroCidadeExcluirActionPerformed
-
-    private void jBCadastroCidadeNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeNovoActionPerformed
-
-        jTFCodigoCidade.setEnabled(false);
-        jTFNomeCidade.setEnabled(true);
-        jCBoxEstado.setEnabled(true);
-
-        jTFCodigoCidade.setText("");
-        jTFNomeCidade.setText("");
-        jCBoxEstado.addItem("");
-
-        jBCadastroCidadeSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
-        jBCadastroCidadeAlterar.setEnabled(true);
-        jBCadastroCidadeExcluir.setEnabled(true);
-        jBCadastroCidadeNovo.setEnabled(false);
-    }//GEN-LAST:event_jBCadastroCidadeNovoActionPerformed
-
-    private void jBCadastroCidadeSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeSairActionPerformed
-        // TODO add your handling code here:
-        dispose();
-
-    }//GEN-LAST:event_jBCadastroCidadeSairActionPerformed
-
-
-    private void jBPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimeiroActionPerformed
-        jBCadastroCidadeAlterar.setEnabled(true);
-        jBCadastroCidadeExcluir.setEnabled(true);
-        jBCadastroCidadeLimpar.setEnabled(true);
-        jBCadastroCidadeNovo.setEnabled(false);
-        jTFNomeCidade.setEnabled(true);
-        try {
-            conexaoCidade.executaSQL("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
-            conexaoCidade.rs.first();
-            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));            
-            
-           // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
-            //conexaoEstado.rs.first();
-            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-
-            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
-            jTFNomeCidade.setEnabled(true);
-            jCBoxEstado.setEnabled(true);
-
-                    
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
-        }
-    }//GEN-LAST:event_jBPrimeiroActionPerformed
-
-    private void jBUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUltimoActionPerformed
-        jBCadastroCidadeAlterar.setEnabled(true);
-        jBCadastroCidadeExcluir.setEnabled(true);
-        jBCadastroCidadeLimpar.setEnabled(true);
-        jBCadastroCidadeNovo.setEnabled(false);
-        jTFNomeCidade.setEnabled(true);
-        try {
-            conexaoCidade.executaSQL("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
-            conexaoCidade.rs.last();
-            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
-
-           // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
-            //conexaoEstado.rs.last();
-            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-            
-            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
-            jTFNomeCidade.setEnabled(true);
-            jCBoxEstado.setEnabled(true);                     
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
-        }
-    }//GEN-LAST:event_jBUltimoActionPerformed
-
-    private void jBAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnteriorActionPerformed
-        jBCadastroCidadeAlterar.setEnabled(true);
-        jBCadastroCidadeExcluir.setEnabled(true);
-        jBCadastroCidadeLimpar.setEnabled(true);
-        jBCadastroCidadeNovo.setEnabled(false);
-        jTFNomeCidade.setEnabled(true);
-        try {
-            //conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY id_cidade");            
-            conexaoCidade.rs.previous();
-            
-            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
-            jTFNomeCidade.setEnabled(true);
-            jCBoxEstado.setEnabled(true); 
-            
-            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
-
-           // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
-            //conexaoEstado.rs.previous();
-            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente                             
-
-        } catch (SQLException ex) {
-            
-        }
-    }//GEN-LAST:event_jBAnteriorActionPerformed
-
-    private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
-        jBCadastroCidadeAlterar.setEnabled(true);
-        jBCadastroCidadeExcluir.setEnabled(true);
-        jBCadastroCidadeLimpar.setEnabled(true);
-        jBCadastroCidadeNovo.setEnabled(false);
-        jTFNomeCidade.setEnabled(true);
-        try {
-            //conexaoCidade.executaSQL("SELECT * FROM cidade ORDER BY id_cidade");            
-            conexaoCidade.rs.next();
-            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
-
-            //conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
-            //conexaoEstado.rs.next();
-            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-            
-            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
-            jTFNomeCidade.setEnabled(true);
-            jCBoxEstado.setEnabled(true);                  
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
-        }
-    }//GEN-LAST:event_jBProximoActionPerformed
 
     private void jBCadastroCidadeAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeAlterarActionPerformed
         // TODO add your handling code here:
@@ -535,7 +504,7 @@ public class FrmCidade extends javax.swing.JFrame {
         jTFNomeCidade.setText("");
         jCBoxEstado.addItem("");
 
-        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES
         jBCadastroCidadeAlterar.setEnabled(false);
         jBCadastroCidadeExcluir.setEnabled(false);
         jBCadastroCidadeLimpar.setEnabled(false);
@@ -544,8 +513,18 @@ public class FrmCidade extends javax.swing.JFrame {
         preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
     }//GEN-LAST:event_jBCadastroCidadeAlterarActionPerformed
 
-    private void jBCadastroCidadeLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeLimparActionPerformed
-        // TODO add your handling code here:
+    private void jBCadastroCidadeSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeSalvarActionPerformed
+        try {
+            modeloCidade.setNomeCidade(jTFNomeCidade.getText());
+            conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE nome_estado = '" + jCBoxEstado.getSelectedItem() + "'");
+            conexaoEstado.rs.first();
+            modeloCidade.setIdEstado(conexaoEstado.rs.getInt("id_estado"));
+            controleCidade.inserirCidade(modeloCidade);
+            JOptionPane.showMessageDialog(null, "Dados Gravados com Sucesso!");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: " + ex.getMessage());
+        }
         jTFCodigoCidade.setEnabled(false);
         jTFNomeCidade.setEnabled(false);
         jCBoxEstado.setEnabled(false);
@@ -554,11 +533,30 @@ public class FrmCidade extends javax.swing.JFrame {
         jTFNomeCidade.setText("");
         jCBoxEstado.addItem("");
 
-        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES
         jBCadastroCidadeAlterar.setEnabled(false);
         jBCadastroCidadeExcluir.setEnabled(false);
+        jBCadastroCidadeLimpar.setEnabled(false);
         jBCadastroCidadeNovo.setEnabled(true);
-    }//GEN-LAST:event_jBCadastroCidadeLimparActionPerformed
+        preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
+    }//GEN-LAST:event_jBCadastroCidadeSalvarActionPerformed
+
+    private void jBCadastroCidadeNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeNovoActionPerformed
+
+        jTFCodigoCidade.setEnabled(false);
+        jTFNomeCidade.setEnabled(true);
+        jCBoxEstado.setEnabled(true);
+
+        jTFCodigoCidade.setText("");
+        jTFNomeCidade.setText("");
+        jCBoxEstado.addItem("");
+
+        jBCadastroCidadeSalvar.setEnabled(true);     // DESABILITA OS BOTOES
+        jBCadastroCidadeAlterar.setEnabled(true);
+        jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
+    }//GEN-LAST:event_jBCadastroCidadeNovoActionPerformed
+
 
     public void preencherTabela(String sql) {
         ArrayList dados = new ArrayList();
