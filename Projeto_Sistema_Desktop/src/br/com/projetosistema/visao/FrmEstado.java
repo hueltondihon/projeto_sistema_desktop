@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.projetosistema.visao;
 
 import br.com.projetosistema.controle.ConectaBanco;
@@ -23,24 +22,26 @@ import javax.swing.ListSelectionModel;
  * @author Huelton
  */
 public class FrmEstado extends javax.swing.JFrame {
+
     ConectaBanco conexaoEstado = new ConectaBanco(); // instancia a classe de conexao do banco
     ModeloEstado modeloEstado = new ModeloEstado();
     ControleEstado controleEstado = new ControleEstado();
+
     /**
      * Creates new form FrmEstado
      */
-    public FrmEstado() {       
-                initComponents();
-                conexaoEstado.conecta(); // abre a conexao do banco dentro da janela
-                preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
+    public FrmEstado() {
+        initComponents();
+        conexaoEstado.conecta(); // abre a conexao do banco dentro da janela
+        preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
 
-                jTFCodigoEstado.setEnabled(false); // campo desabilitados quando a janela e aberta
-                jTFNomeEstado.setEnabled(false);
-                jTFSigla.setEnabled(false);
+        jTFCodigoEstado.setEnabled(false); // campo desabilitados quando a janela e aberta
+        jTFNomeEstado.setEnabled(false);
+        jTFSigla.setEnabled(false);
 
-                jBCadastroEstadoSalvar.setEnabled(false);    // DESABILITA OS BOTOES  quando a janela e aberta
-                jBCadastroEstadoAlterar.setEnabled(false);
-                jBCadastroEstadoExcluir.setEnabled(false);
+        jBCadastroEstadoSalvar.setEnabled(false);    // DESABILITA OS BOTOES  quando a janela e aberta
+        jBCadastroEstadoAlterar.setEnabled(false);
+        jBCadastroEstadoExcluir.setEnabled(false);
     }
 
     /**
@@ -310,245 +311,235 @@ public class FrmEstado extends javax.swing.JFrame {
             modeloEstado.setSiglaEstado(jTFSigla.getText()); //pega a sigla de estado dotextfield
             controleEstado.inserirEstado(modeloEstado);
             JOptionPane.showMessageDialog(null, "Inserido com sucesso ao Banco!");
-            
+
             jTFCodigoEstado.setEnabled(false);
             jTFCodigoEstado.setText("");
             jTFNomeEstado.setText("");
             jTFSigla.setText("");
-            
+
             jBCadastroEstadoSalvar.setEnabled(false);     // DESABILITA OS BOTOES
             jBCadastroEstadoAlterar.setEnabled(false);
             jBCadastroEstadoExcluir.setEnabled(false);
             jBCadastroEstadoNovo.setEnabled(true);
-        } 
-           preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
+        }
+        preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
     }//GEN-LAST:event_jBCadastroEstadoSalvarActionPerformed
 
     private void jBCadastroEstadoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoExcluirActionPerformed
         jTFCodigoEstado.setEnabled(false);
-        
+
         modeloEstado.setIdEstado(Integer.parseInt(jTFCodigoEstado.getText()));
         modeloEstado.setNomeEstado(jTFNomeEstado.getText());
         modeloEstado.setSiglaEstado(jTFSigla.getText());
-        if(jTFSigla.getText().equals("") && jTFNomeEstado.getText().equals("")){
+        if (jTFSigla.getText().equals("") && jTFNomeEstado.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "o campo esta em branco!");
-        }else{
+        } else {
             int response = JOptionPane.showConfirmDialog(
-                    this," Voce quer deletar esse arquivo?", null,
+                    this, " Voce quer deletar esse arquivo?", null,
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
-            if (response == JOptionPane.YES_OPTION )
-            {
+            if (response == JOptionPane.YES_OPTION) {
                 controleEstado.deletarEstado(modeloEstado);
-                JOptionPane.showMessageDialog(null, "Deletado com sucesso do Banco!");              
-                
+                JOptionPane.showMessageDialog(null, "Deletado com sucesso do Banco!");
+
                 jTFCodigoEstado.setEnabled(true);
                 jTFCodigoEstado.setText("");
                 jTFNomeEstado.setText("");
                 jTFSigla.setText("");
-                
+
                 jBCadastroEstadoSalvar.setEnabled(false);    // DESABILITA OS BOTOES  
                 jBCadastroEstadoAlterar.setEnabled(false);
                 jBCadastroEstadoExcluir.setEnabled(false);
                 jBCadastroEstadoNovo.setEnabled(true);
-            }         
-            
+            }
+
         }
-         preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");                          
+        preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
     }//GEN-LAST:event_jBCadastroEstadoExcluirActionPerformed
 
     private void jBCadastroEstadoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoNovoActionPerformed
-                
-                jTFCodigoEstado.setEnabled(false);
-                jTFNomeEstado.setEnabled(true);
-                jTFSigla.setEnabled(true);
-                
-                jTFCodigoEstado.setText("");
-                jTFNomeEstado.setText("");
-                jTFSigla.setText("");
 
-                jBCadastroEstadoSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
-                jBCadastroEstadoAlterar.setEnabled(true);
-                jBCadastroEstadoExcluir.setEnabled(true);
-                jBCadastroEstadoNovo.setEnabled(false);
+        jTFCodigoEstado.setEnabled(false);
+        jTFNomeEstado.setEnabled(true);
+        jTFSigla.setEnabled(true);
+
+        jTFCodigoEstado.setText("");
+        jTFNomeEstado.setText("");
+        jTFSigla.setText("");
+
+        jBCadastroEstadoSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
+        jBCadastroEstadoAlterar.setEnabled(true);
+        jBCadastroEstadoExcluir.setEnabled(true);
+        jBCadastroEstadoNovo.setEnabled(false);
     }//GEN-LAST:event_jBCadastroEstadoNovoActionPerformed
 
     private void jBCadastroEstadoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoSairActionPerformed
         // TODO add your handling code here:
         dispose();
-        
+
     }//GEN-LAST:event_jBCadastroEstadoSairActionPerformed
-   
-    
+
+
     private void jBPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimeiroActionPerformed
-        jBCadastroEstadoAlterar.setEnabled(true); 
+        jBCadastroEstadoAlterar.setEnabled(true);
         jBCadastroEstadoExcluir.setEnabled(true);
         jBCadastroEstadoLimpar.setEnabled(true);
         jBCadastroEstadoNovo.setEnabled(false);
-        try{
-             conexaoEstado.executaSQL("select * from tb_estados ");            
-             conexaoEstado.rs.first();
-             
-                jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
-                jTFNomeEstado.setEnabled(true);
-                jTFSigla.setEnabled(true);
-             
-             jTFCodigoEstado.setText(String.valueOf(conexaoEstado.rs.getInt("id")));
-             jTFNomeEstado.setText(conexaoEstado.rs.getString("nome"));//mostra o nome de estado do textfield
-             jTFSigla.setText(conexaoEstado.rs.getString("uf")); //mostra a sigla de estado dotextfield         
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        try {
+            conexaoEstado.executaSQL("SELECT * FROM tb_estados");
+            conexaoEstado.rs.first();
+
+            jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeEstado.setEnabled(true);
+            jTFSigla.setEnabled(true);
+
+            jTFCodigoEstado.setText(String.valueOf(conexaoEstado.rs.getInt("id_estado")));
+            jTFNomeEstado.setText(conexaoEstado.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+            jTFSigla.setText(conexaoEstado.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield         
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_jBPrimeiroActionPerformed
 
     private void jBUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUltimoActionPerformed
-         jBCadastroEstadoAlterar.setEnabled(true); 
-         jBCadastroEstadoExcluir.setEnabled(true);
-         jBCadastroEstadoLimpar.setEnabled(true);
-         jBCadastroEstadoNovo.setEnabled(false);
-        try{
-            conexaoEstado.executaSQL("select * from tb_estados ");            
+        jBCadastroEstadoAlterar.setEnabled(true);
+        jBCadastroEstadoExcluir.setEnabled(true);
+        jBCadastroEstadoLimpar.setEnabled(true);
+        jBCadastroEstadoNovo.setEnabled(false);
+        try {
+            conexaoEstado.executaSQL("SELECT * FROM tb_estados ");
             conexaoEstado.rs.last();
-            
-                jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
-                jTFNomeEstado.setEnabled(true);
-                jTFSigla.setEnabled(true);
-            
-             jTFCodigoEstado.setText(String.valueOf(conexaoEstado.rs.getInt("id_estado")));
-             jTFNomeEstado.setText(conexaoEstado.rs.getString("nome_estado"));//mostra o nome de estado do textfield
-             jTFSigla.setText(conexaoEstado.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+
+            jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeEstado.setEnabled(true);
+            jTFSigla.setEnabled(true);
+
+            jTFCodigoEstado.setText(String.valueOf(conexaoEstado.rs.getInt("id_estado")));
+            jTFNomeEstado.setText(conexaoEstado.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+            jTFSigla.setText(conexaoEstado.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_jBUltimoActionPerformed
 
     private void jBAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnteriorActionPerformed
-         jBCadastroEstadoAlterar.setEnabled(true); 
-         jBCadastroEstadoExcluir.setEnabled(true);
-         jBCadastroEstadoLimpar.setEnabled(true);
-         jBCadastroEstadoNovo.setEnabled(false);
-        try{
+        jBCadastroEstadoAlterar.setEnabled(true);
+        jBCadastroEstadoExcluir.setEnabled(true);
+        jBCadastroEstadoLimpar.setEnabled(true);
+        jBCadastroEstadoNovo.setEnabled(false);
+        try {
             //conexao.executaSQL("SELECT * FROM estado ");            
-            conexaoEstado.rs.previous();  
-            
-             jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
-             jTFNomeEstado.setEnabled(true);
-             jTFSigla.setEnabled(true);
-            
-             jTFCodigoEstado.setText(String.valueOf(conexaoEstado.rs.getInt("id_estado")));
-             jTFNomeEstado.setText(conexaoEstado.rs.getString("nome_estado"));//mostra o nome de estado do textfield
-             jTFSigla.setText(conexaoEstado.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+            conexaoEstado.rs.previous();
+
+            jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeEstado.setEnabled(true);
+            jTFSigla.setEnabled(true);
+
+            jTFCodigoEstado.setText(String.valueOf(conexaoEstado.rs.getInt("id_estado")));
+            jTFNomeEstado.setText(conexaoEstado.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+            jTFSigla.setText(conexaoEstado.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_jBAnteriorActionPerformed
 
     private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
-         jBCadastroEstadoAlterar.setEnabled(true); 
-         jBCadastroEstadoExcluir.setEnabled(true);
-         jBCadastroEstadoLimpar.setEnabled(true);
-         jBCadastroEstadoNovo.setEnabled(false);
-        try{
-             //conexao.executaSQL("select * from estado ");            
-             conexaoEstado.rs.next();
-             
-             jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
-             jTFNomeEstado.setEnabled(true);
-             jTFSigla.setEnabled(true);
-             
-             jTFCodigoEstado.setText(String.valueOf(conexaoEstado.rs.getInt("id_estado")));
-             jTFNomeEstado.setText(conexaoEstado.rs.getString("nome_estado"));//mostra o nome de estado do textfield
-             jTFSigla.setText(conexaoEstado.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        jBCadastroEstadoAlterar.setEnabled(true);
+        jBCadastroEstadoExcluir.setEnabled(true);
+        jBCadastroEstadoLimpar.setEnabled(true);
+        jBCadastroEstadoNovo.setEnabled(false);
+        try {
+            //conexao.executaSQL("select * from estado ");            
+            conexaoEstado.rs.next();
+
+            jTFCodigoEstado.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeEstado.setEnabled(true);
+            jTFSigla.setEnabled(true);
+
+            jTFCodigoEstado.setText(String.valueOf(conexaoEstado.rs.getInt("id_estado")));
+            jTFNomeEstado.setText(conexaoEstado.rs.getString("nome_estado"));//mostra o nome de estado do textfield
+            jTFSigla.setText(conexaoEstado.rs.getString("sigla_estado")); //mostra a sigla de estado dotextfield
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_jBProximoActionPerformed
 
     private void jBCadastroEstadoAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoAlterarActionPerformed
-        // TODO add your handling code here:
-        try {
-            PreparedStatement pst = conexaoEstado.conn.prepareStatement("UPDATE tb_estados SET nome_estado = ?, sigla_estado = ? WHERE id_estado = ?");
-            if (jTFNomeEstado.getText().equals("") && jTFSigla.getText().equals("")) {
-                 JOptionPane.showMessageDialog(null, "O campo Estado ou Sigla estao em branco, por favor preencha todos os campos!");
-            } else {
-                   pst.setString(1,jTFNomeEstado.getText());//pega o nome de estado do textfield
-                   pst.setString(2, jTFSigla.getText()); //pega a sigla de estado dotextfield
-                   pst.setInt(3, Integer.parseInt(jTFCodigoEstado.getText())); //pega a sigla de estado do textfield TRANSFORMA EM UM INTEIRO
-                   pst.executeUpdate();
-                   JOptionPane.showMessageDialog(null, "Atualizado com sucesso ao Banco!");
-                   preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
-                   
-                jTFCodigoEstado.setEnabled(false);
-                jTFCodigoEstado.setText("");
-                jTFNomeEstado.setText("");
-                jTFSigla.setText("");
-        
-                jBCadastroEstadoSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
-                jBCadastroEstadoAlterar.setEnabled(false);
-                jBCadastroEstadoExcluir.setEnabled(false);
-                jBCadastroEstadoNovo.setEnabled(true);
-              }            
-                
-            }catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao Atualizar os campos no Banco\n Erro: "+ex.getMessage());
+
+        if (jTFNomeEstado.getText().equals("") && jTFSigla.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo Estado ou Sigla estao em branco, por favor preencha todos os campos!");
+        } else {
+            modeloEstado.setNomeEstado(jTFNomeEstado.getText());//pega o nome de estado do textfield
+            modeloEstado.setSiglaEstado(jTFSigla.getText()); //pega a sigla de estado dotextfield
+            modeloEstado.setIdEstado(Integer.parseInt(jTFCodigoEstado.getText())); //pega a sigla de estado do textfield TRANSFORMA EM UM INTEIRO
+            controleEstado.alterarEstado(modeloEstado);
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso ao Banco!");
+
+            jTFCodigoEstado.setEnabled(false);
+            jTFCodigoEstado.setText("");
+            jTFNomeEstado.setText("");
+            jTFSigla.setText("");
+
+            jBCadastroEstadoSalvar.setEnabled(false);     // DESABILITA OS BOTOES
+            jBCadastroEstadoAlterar.setEnabled(false);
+            jBCadastroEstadoExcluir.setEnabled(false);
+            jBCadastroEstadoNovo.setEnabled(true);
         }
+        preencherTabela("SELECT * FROM tb_estados ORDER BY id_estado");
     }//GEN-LAST:event_jBCadastroEstadoAlterarActionPerformed
 
     private void jBCadastroEstadoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroEstadoLimparActionPerformed
         // TODO add your handling code here:
-                jTFCodigoEstado.setEnabled(false);
-                jTFNomeEstado.setEnabled(false);
-                jTFSigla.setEnabled(false);
-                
-                jTFCodigoEstado.setText("");
-                jTFNomeEstado.setText("");
-                jTFSigla.setText("");
+        jTFCodigoEstado.setEnabled(false);
+        jTFNomeEstado.setEnabled(false);
+        jTFSigla.setEnabled(false);
 
-                jBCadastroEstadoSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
-                jBCadastroEstadoAlterar.setEnabled(false);
-                jBCadastroEstadoExcluir.setEnabled(false);
-                jBCadastroEstadoNovo.setEnabled(true);
+        jTFCodigoEstado.setText("");
+        jTFNomeEstado.setText("");
+        jTFSigla.setText("");
+
+        jBCadastroEstadoSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroEstadoAlterar.setEnabled(false);
+        jBCadastroEstadoExcluir.setEnabled(false);
+        jBCadastroEstadoNovo.setEnabled(true);
     }//GEN-LAST:event_jBCadastroEstadoLimparActionPerformed
-    
-    public void preencherTabela(String sql){
+
+    public void preencherTabela(String sql) {
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID","Nome","Sigla"};
-        
+        String[] colunas = new String[]{"ID", "Nome", "Sigla"};
+
         conexaoEstado.executaSQL(sql);
         try {
-            conexaoEstado.rs.first();            
-            do {            
-                 dados.add(new Object[]{conexaoEstado.rs.getInt("id_estado"),
-                                        conexaoEstado.rs.getString("nome_estado"),
-                                        conexaoEstado.rs.getString("sigla_estado")});
-               } while (conexaoEstado.rs.next());
+            conexaoEstado.rs.first();
+            do {
+                dados.add(new Object[]{conexaoEstado.rs.getInt("id_estado"),
+                    conexaoEstado.rs.getString("nome_estado"),
+                    conexaoEstado.rs.getString("sigla_estado")});
+            } while (conexaoEstado.rs.next());
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao Preencher dados na Tabela com o Banco de dados\n Erro: "+ex.getMessage()); 
+            JOptionPane.showMessageDialog(null, "Erro ao Preencher dados na Tabela com o Banco de dados\n Erro: " + ex.getMessage());
         }
-        
+
         ModeloTabela modeloTabela = new ModeloTabela(dados, colunas);
         jTableEstado.setModel(modeloTabela);
         jTableEstado.getColumnModel().getColumn(0).setPreferredWidth(100); // configuracao de tamanho do campo
         jTableEstado.getColumnModel().getColumn(0).setResizable(false); // redimensionamento da tabela nesse caso e falso
-        
+
         jTableEstado.getColumnModel().getColumn(1).setPreferredWidth(505); // configuracao de tamanho do campo
         jTableEstado.getColumnModel().getColumn(1).setResizable(true); // redimensionamento da tabela nesse caso e true
-        
+
         jTableEstado.getColumnModel().getColumn(2).setPreferredWidth(100); // configuracao de tamanho do campo
         jTableEstado.getColumnModel().getColumn(2).setResizable(false); // redimensionamento da tabela nesse caso e true
-        
+
         jTableEstado.getTableHeader().setReorderingAllowed(false); // nao faz reordenacao
         jTableEstado.setAutoResizeMode(jTableEstado.AUTO_RESIZE_OFF);//nao e redimensionavel
         jTableEstado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // posso selecionar somente um campo
     }
-     
-                                          
-   
-    
+
     /**
      * @param args the command line arguments
      */

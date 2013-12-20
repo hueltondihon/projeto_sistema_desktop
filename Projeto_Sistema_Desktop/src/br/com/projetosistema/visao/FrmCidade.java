@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.projetosistema.visao;
 
 import br.com.projetosistema.controle.ConectaBanco;
@@ -23,40 +22,40 @@ import javax.swing.ListSelectionModel;
  * @author Huelton
  */
 public class FrmCidade extends javax.swing.JFrame {
+
     ConectaBanco conexaoEstado = new ConectaBanco(); // instancia a classe de conexao do banco com entidade Estado
     ConectaBanco conexaoCidade = new ConectaBanco();  // instancia a classe de conexao do banco com entidade Cidade
     ModeloCidade modeloCidade = new ModeloCidade();  //Meu objeto de modelo
     ControleCidade controleCidade = new ControleCidade(); //o controlador do objeto modelo
+
     /**
      * Creates new form FrmCidade
      */
-    public FrmCidade() {       
-                initComponents();
-                
-                 conexaoEstado.conecta(); // abre a conexao do banco dentro da janela
-                  conexaoCidade.conecta(); 
-                 preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
-                 conexaoEstado.executaSQL("SELECT * FROM tb_estados ORDER BY nome_estado ");
-                 jCBoxEstado.removeAllItems(); //remove todos os itens ue nao sao ligados ao banco de dados          
-                                  
-                try {                     
-                      
-                      conexaoEstado.rs.first();                      
-                      do {                        
-                          jCBoxEstado.addItem(conexaoEstado.rs.getString("nome_estado"));                         
-                    } while (conexaoEstado.rs.next());
-                } catch (SQLException ex) {
-                     JOptionPane.showMessageDialog(null, "Erro ao inerir o comboBox:\n Erro: !"+ex.getMessage());
-                }
-                
-                
-                
-                jTFCodigoCidade.setEnabled(false); // campo desabilitados quando a janela e aberta
-                jTFNomeCidade.setEnabled(false);
-               
-                jBCadastroCidadeSalvar.setEnabled(false);    // DESABILITA OS BOTOES  quando a janela e aberta
-                jBCadastroCidadeAlterar.setEnabled(false);
-                jBCadastroCidadeExcluir.setEnabled(false);
+    public FrmCidade() {
+        initComponents();
+
+        conexaoEstado.conecta(); // abre a conexao do banco dentro da janela
+        conexaoCidade.conecta(); // abre a conexao do banco dentro da janela
+        preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
+        conexaoEstado.executaSQL("SELECT * FROM tb_estados ORDER BY nome_estado ");
+        jCBoxEstado.removeAllItems(); //remove todos os itens ue nao sao ligados ao banco de dados          
+
+        try {
+
+            conexaoEstado.rs.first();
+            do {
+                jCBoxEstado.addItem(conexaoEstado.rs.getString("nome_estado"));
+            } while (conexaoEstado.rs.next());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao inerir o comboBox:\n Erro: !" + ex.getMessage());
+        }
+
+        jTFCodigoCidade.setEnabled(false); // campo desabilitados quando a janela e aberta
+        jTFNomeCidade.setEnabled(false);
+
+        jBCadastroCidadeSalvar.setEnabled(false);    // DESABILITA OS BOTOES  quando a janela e aberta
+        jBCadastroCidadeAlterar.setEnabled(false);
+        jBCadastroCidadeExcluir.setEnabled(false);
     }
 
     /**
@@ -320,254 +319,283 @@ public class FrmCidade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastroCidadeSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeSalvarActionPerformed
-       try {                  
+        try {
             modeloCidade.setNomeCidade(jTFNomeCidade.getText());
-            conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE nome_estado = '"+jCBoxEstado.getSelectedItem()+"'");
+            conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE nome_estado = '" + jCBoxEstado.getSelectedItem() + "'");
             conexaoEstado.rs.first();
             modeloCidade.setIdEstado(conexaoEstado.rs.getInt("id_estado"));
             controleCidade.inserirCidade(modeloCidade);
-             JOptionPane.showMessageDialog(null,"Dados Gravados com Sucesso!");
-            } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Dados Gravados com Sucesso!");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: " + ex.getMessage());
         }
-         preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
+        jTFCodigoCidade.setEnabled(false);
+        jTFNomeCidade.setEnabled(false);
+        jCBoxEstado.setEnabled(false);
+
+        jTFCodigoCidade.setText("");
+        jTFNomeCidade.setText("");
+        jCBoxEstado.addItem("");
+
+        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeAlterar.setEnabled(false);
+        jBCadastroCidadeExcluir.setEnabled(false);
+        jBCadastroCidadeLimpar.setEnabled(false);
+        jBCadastroCidadeNovo.setEnabled(true);
+        preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
     }//GEN-LAST:event_jBCadastroCidadeSalvarActionPerformed
 
     private void jBCadastroCidadeExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeExcluirActionPerformed
         try {
             modeloCidade.setIdCidade(Integer.parseInt(jTFCodigoCidade.getText()));
-            modeloCidade.setNomeCidade(jTFNomeCidade.getText());           
+            modeloCidade.setNomeCidade(jTFNomeCidade.getText());
             modeloCidade.setIdEstado(conexaoCidade.rs.getInt("id_estado"));
-             if(jTFCodigoCidade.getText().equals("") && jTFNomeCidade.getText().equals("")){
-             JOptionPane.showMessageDialog(null, "o campo esta em branco!");
-             jCBoxEstado.setEnabled(false);
-            }else{
+            if (jTFCodigoCidade.getText().equals("") && jTFNomeCidade.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "o campo esta em branco!");
+                jCBoxEstado.setEnabled(false);
+            } else {
                 int response = JOptionPane.showConfirmDialog(
-                    this," Voce quer deletar esse arquivo?", null,
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE);
-            if (response == JOptionPane.YES_OPTION )
-            {
-            controleCidade.deletarCidade(modeloCidade);
-            JOptionPane.showMessageDialog(null,"Dados Deletados com Sucesso!");
-            conexaoCidade.rs.next();
-           }
-         }
-       } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: "+ex.getMessage());
+                        this, " Voce quer deletar esse arquivo?", null,
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    controleCidade.deletarCidade(modeloCidade);
+                    JOptionPane.showMessageDialog(null, "Dados Deletados com Sucesso!");
+                    conexaoCidade.rs.next();
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: " + ex.getMessage());
         }
-         preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");                 
+
+        jTFCodigoCidade.setEnabled(false);
+        jTFNomeCidade.setEnabled(false);
+        jCBoxEstado.setEnabled(false);
+
+        jTFCodigoCidade.setText("");
+        jTFNomeCidade.setText("");
+        jCBoxEstado.addItem("");
+
+        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeAlterar.setEnabled(false);
+        jBCadastroCidadeExcluir.setEnabled(false);
+        jBCadastroCidadeLimpar.setEnabled(false);
+        jBCadastroCidadeNovo.setEnabled(true);
+
+        preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
     }//GEN-LAST:event_jBCadastroCidadeExcluirActionPerformed
 
     private void jBCadastroCidadeNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeNovoActionPerformed
-                
-                jTFCodigoCidade.setEnabled(false);
-                jTFNomeCidade.setEnabled(true);
-                jCBoxEstado.setEnabled(true);
-                
-                jTFCodigoCidade.setText("");
-                jTFNomeCidade.setText("");
-                jCBoxEstado.addItem("");
 
-                jBCadastroCidadeSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
-                jBCadastroCidadeAlterar.setEnabled(true);
-                jBCadastroCidadeExcluir.setEnabled(true);
-                jBCadastroCidadeNovo.setEnabled(false);
+        jTFCodigoCidade.setEnabled(false);
+        jTFNomeCidade.setEnabled(true);
+        jCBoxEstado.setEnabled(true);
+
+        jTFCodigoCidade.setText("");
+        jTFNomeCidade.setText("");
+        jCBoxEstado.addItem("");
+
+        jBCadastroCidadeSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeAlterar.setEnabled(true);
+        jBCadastroCidadeExcluir.setEnabled(true);
+        jBCadastroCidadeNovo.setEnabled(false);
     }//GEN-LAST:event_jBCadastroCidadeNovoActionPerformed
 
     private void jBCadastroCidadeSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeSairActionPerformed
         // TODO add your handling code here:
         dispose();
-        
+
     }//GEN-LAST:event_jBCadastroCidadeSairActionPerformed
 
-    
-    
-    
+
     private void jBPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimeiroActionPerformed
-        jBCadastroCidadeAlterar.setEnabled(true); 
+        jBCadastroCidadeAlterar.setEnabled(true);
         jBCadastroCidadeExcluir.setEnabled(true);
         jBCadastroCidadeLimpar.setEnabled(true);
         jBCadastroCidadeNovo.setEnabled(false);
-        try{
-             conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY id_cidade");            
-             conexaoCidade.rs.first();
-             jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-             jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
-             
-             conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado="+conexaoCidade.rs.getInt("id_estado"));
-             conexaoEstado.rs.first();
-             jCBoxEstado.setSelectedItem(conexaoEstado.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-             
-                jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
-                jTFNomeCidade.setEnabled(true);
-                jCBoxEstado.setEnabled(true);
-             
-             jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-             jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));//mostra o nome de estado do textfield
-         //    jCBoxEstado.setText(conexao.rs.getString("id_estado")); //mostra a sigla de estado dotextfield         
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        jTFNomeCidade.setEnabled(true);
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
+            conexaoCidade.rs.first();
+            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
+            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));            
+            
+           // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
+            //conexaoEstado.rs.first();
+            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
+
+            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeCidade.setEnabled(true);
+            jCBoxEstado.setEnabled(true);
+
+                    
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_jBPrimeiroActionPerformed
 
     private void jBUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUltimoActionPerformed
-        jBCadastroCidadeAlterar.setEnabled(true); 
+        jBCadastroCidadeAlterar.setEnabled(true);
         jBCadastroCidadeExcluir.setEnabled(true);
         jBCadastroCidadeLimpar.setEnabled(true);
         jBCadastroCidadeNovo.setEnabled(false);
-      try{
-             conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY id_cidade");            
-             conexaoCidade.rs.last();
-             jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-             jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
-             
-             conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado="+conexaoCidade.rs.getInt("id_estado"));
-             conexaoEstado.rs.last();
-             jCBoxEstado.setSelectedItem(conexaoEstado.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-             
-                jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
-                jTFNomeCidade.setEnabled(true);
-                jCBoxEstado.setEnabled(true);
-             
-             jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-             jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));//mostra o nome de estado do textfield
-         //    jCBoxEstado.setText(conexao.rs.getString("id_estado")); //mostra a sigla de estado dotextfield         
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        jTFNomeCidade.setEnabled(true);
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
+            conexaoCidade.rs.last();
+            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
+            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
+
+           // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
+            //conexaoEstado.rs.last();
+            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
+            
+            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeCidade.setEnabled(true);
+            jCBoxEstado.setEnabled(true);                     
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_jBUltimoActionPerformed
 
     private void jBAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnteriorActionPerformed
-        jBCadastroCidadeAlterar.setEnabled(true); 
+        jBCadastroCidadeAlterar.setEnabled(true);
         jBCadastroCidadeExcluir.setEnabled(true);
         jBCadastroCidadeLimpar.setEnabled(true);
         jBCadastroCidadeNovo.setEnabled(false);
-        try{
-             //conexaoCidade.executaSQL("SELECT * FROM cidade ORDER BY id_cidade");            
-             conexaoCidade.rs.previous();
-             jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-             jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
-             
-             conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado="+conexaoCidade.rs.getInt("id_estado"));
-             conexaoEstado.rs.previous();
-             jCBoxEstado.setSelectedItem(conexaoEstado.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-             
-                jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
-                jTFNomeCidade.setEnabled(true);
-                jCBoxEstado.setEnabled(true);
-             
-             jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-             jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));//mostra o nome de estado do textfield
-         //    jCBoxEstado.setText(conexao.rs.getString("id_estado")); //mostra a sigla de estado dotextfield         
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        jTFNomeCidade.setEnabled(true);
+        try {
+            //conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY id_cidade");            
+            conexaoCidade.rs.previous();
+            
+            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeCidade.setEnabled(true);
+            jCBoxEstado.setEnabled(true); 
+            
+            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
+            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
+
+           // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
+            //conexaoEstado.rs.previous();
+            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente                             
+
+        } catch (SQLException ex) {
+            
         }
     }//GEN-LAST:event_jBAnteriorActionPerformed
 
     private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
-        jBCadastroCidadeAlterar.setEnabled(true); 
+        jBCadastroCidadeAlterar.setEnabled(true);
         jBCadastroCidadeExcluir.setEnabled(true);
         jBCadastroCidadeLimpar.setEnabled(true);
         jBCadastroCidadeNovo.setEnabled(false);
-        try{
-             //conexaoCidade.executaSQL("SELECT * FROM cidade ORDER BY id_cidade");            
-             conexaoCidade.rs.next();
-             jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-             jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
-             
-             conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado="+conexaoCidade.rs.getInt("id_estado"));
-             conexaoEstado.rs.next();
-             jCBoxEstado.setSelectedItem(conexaoEstado.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-             
-                jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
-                jTFNomeCidade.setEnabled(true);
-                jCBoxEstado.setEnabled(true);
-             
-             jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
-             jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));//mostra o nome de estado do textfield
-         //    jCBoxEstado.setText(conexao.rs.getString("id_estado")); //mostra a sigla de estado dotextfield         
-             
-        }catch( SQLException ex){
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: "+ex.getMessage());
+        jTFNomeCidade.setEnabled(true);
+        try {
+            //conexaoCidade.executaSQL("SELECT * FROM cidade ORDER BY id_cidade");            
+            conexaoCidade.rs.next();
+            jTFCodigoCidade.setText(String.valueOf(conexaoCidade.rs.getInt("id_cidade")));
+            jTFNomeCidade.setText(conexaoCidade.rs.getString("nome_cidade"));
+
+            //conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
+            //conexaoEstado.rs.next();
+            jCBoxEstado.setSelectedItem(conexaoCidade.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
+            
+            jTFCodigoCidade.setEnabled(true); // campo habilitados quando a janela e aberta
+            jTFNomeCidade.setEnabled(true);
+            jCBoxEstado.setEnabled(true);                  
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_jBProximoActionPerformed
 
     private void jBCadastroCidadeAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeAlterarActionPerformed
         // TODO add your handling code here:
-               
-        try{
+
+        try {
             modeloCidade.setIdCidade(Integer.parseInt(jTFCodigoCidade.getText()));
             modeloCidade.setNomeCidade(jTFNomeCidade.getText());
-            conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE nome_estado ='"+jCBoxEstado.getSelectedItem()+"'");
+            conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE nome_estado ='" + jCBoxEstado.getSelectedItem() + "'");
             conexaoEstado.rs.first();
             modeloCidade.setIdEstado(conexaoEstado.rs.getInt("id_estado"));
             controleCidade.alterarCidade(modeloCidade);
-            JOptionPane.showMessageDialog(null,"Dados Atualizados com Sucesso!");
-            } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Dados Atualizados com Sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: " + ex.getMessage());
         }
-         preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
+
+        jTFCodigoCidade.setEnabled(false);
+        jTFNomeCidade.setEnabled(false);
+        jCBoxEstado.setEnabled(false);
+
+        jTFCodigoCidade.setText("");
+        jTFNomeCidade.setText("");
+        jCBoxEstado.addItem("");
+
+        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeAlterar.setEnabled(false);
+        jBCadastroCidadeExcluir.setEnabled(false);
+        jBCadastroCidadeLimpar.setEnabled(false);
+        jBCadastroCidadeNovo.setEnabled(true);
+
+        preencherTabela("SELECT * FROM tb_cidades INNER JOIN tb_estados ON tb_cidades.id_estado = tb_estados.id_estado");
     }//GEN-LAST:event_jBCadastroCidadeAlterarActionPerformed
 
     private void jBCadastroCidadeLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroCidadeLimparActionPerformed
         // TODO add your handling code here:
-                jTFCodigoCidade.setEnabled(false);
-                jTFNomeCidade.setEnabled(false);
-                jCBoxEstado.setEnabled(false);
-                
-                jTFCodigoCidade.setText("");
-                jTFNomeCidade.setText("");
-                jCBoxEstado.addItem("");
+        jTFCodigoCidade.setEnabled(false);
+        jTFNomeCidade.setEnabled(false);
+        jCBoxEstado.setEnabled(false);
 
-                jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
-                jBCadastroCidadeAlterar.setEnabled(false);
-                jBCadastroCidadeExcluir.setEnabled(false);
-                jBCadastroCidadeNovo.setEnabled(true);
+        jTFCodigoCidade.setText("");
+        jTFNomeCidade.setText("");
+        jCBoxEstado.addItem("");
+
+        jBCadastroCidadeSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroCidadeAlterar.setEnabled(false);
+        jBCadastroCidadeExcluir.setEnabled(false);
+        jBCadastroCidadeNovo.setEnabled(true);
     }//GEN-LAST:event_jBCadastroCidadeLimparActionPerformed
-    
-    public void preencherTabela(String sql){
+
+    public void preencherTabela(String sql) {
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID","Cidade","Estado","UF"};
-        
+        String[] colunas = new String[]{"ID", "Cidade", "Estado", "UF"};
+
         conexaoCidade.executaSQL(sql);
         try {
-            conexaoCidade.rs.first();            
-            do {            
-                 dados.add(new Object[]{conexaoCidade.rs.getInt("id_cidade"),
-                                        conexaoCidade.rs.getString("nome_cidade"),
-                                        conexaoCidade.rs.getString("nome_estado"),
-                                        conexaoCidade.rs.getString("uf")});
-               } while (conexaoCidade.rs.next());
+            conexaoCidade.rs.first();
+            do {
+                dados.add(new Object[]{conexaoCidade.rs.getInt("id_cidade"),
+                    conexaoCidade.rs.getString("nome_cidade"),
+                    conexaoCidade.rs.getString("nome_estado"),
+                    conexaoCidade.rs.getString("uf")});
+            } while (conexaoCidade.rs.next());
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro ao Preencher dados na Tabela com o Banco de dados\n Erro: "+ex.getMessage()); 
+            JOptionPane.showMessageDialog(null, "Erro ao Preencher dados na Tabela com o Banco de dados\n Erro: " + ex.getMessage());
         }
-        
+
         ModeloTabela modeloTabela = new ModeloTabela(dados, colunas);
         jTableCidade.setModel(modeloTabela);
         jTableCidade.getColumnModel().getColumn(0).setPreferredWidth(100); // configuracao de tamanho do campo
         jTableCidade.getColumnModel().getColumn(0).setResizable(false); // redimensionamento da tabela nesse caso e falso
-              
+
         jTableCidade.getColumnModel().getColumn(1).setPreferredWidth(350); // configuracao de tamanho do campo
         jTableCidade.getColumnModel().getColumn(1).setResizable(false); // redimensionamento da tabela nesse caso e true
-        
+
         jTableCidade.getColumnModel().getColumn(2).setPreferredWidth(190); // configuracao de tamanho do campo
         jTableCidade.getColumnModel().getColumn(2).setResizable(true); // redimensionamento da tabela nesse caso e true
-        
+
         jTableCidade.getColumnModel().getColumn(3).setPreferredWidth(100); // configuracao de tamanho do campo
         jTableCidade.getColumnModel().getColumn(3).setResizable(true); // redimensionamento da tabela nesse caso e true
-        
+
         jTableCidade.getTableHeader().setReorderingAllowed(false); // nao faz reordenacao
         jTableCidade.setAutoResizeMode(jTableCidade.AUTO_RESIZE_OFF);//nao e redimensionavel
         jTableCidade.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // posso selecionar somente um campo
     }
-     
-                                          
-   
-    
+
     /**
      * @param args the command line arguments
      */
