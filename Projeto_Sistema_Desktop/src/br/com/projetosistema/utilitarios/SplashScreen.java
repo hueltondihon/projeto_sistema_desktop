@@ -1,3 +1,5 @@
+package br.com.projetosistema.utilitarios;
+
 import br.com.projetosistema.visao.JfrmPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,7 +63,7 @@ public class SplashScreen extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(420, 340, 190, 20);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem_projeto/java-800x480.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/java-800x480.jpg"))); // NOI18N
         jLabel2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jLabel2FocusLost(evt);
@@ -83,7 +85,7 @@ public class SplashScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-     
+      
     }//GEN-LAST:event_formWindowClosing
 
     /**
