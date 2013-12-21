@@ -9,7 +9,8 @@ import br.com.projetosistema.controle.ConectaBanco;
 import br.com.projetosistema.controle.ControleCidade;
 import br.com.projetosistema.controle.ModeloTabela;
 import br.com.projetosistema.modelo.ModeloCidade;
-import java.sql.PreparedStatement;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -58,6 +59,13 @@ public class FrmCidade extends javax.swing.JFrame {
         jBCadastroCidadeExcluir.setEnabled(false);
     }
 
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("icones/media-eject-7.png"));
+        return retValue;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
