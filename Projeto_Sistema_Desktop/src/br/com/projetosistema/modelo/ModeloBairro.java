@@ -5,7 +5,16 @@ public class ModeloBairro {
     
     private int idBairro;
     private  String nomeBairro;
-    private int idCidade;
+    private String cidade;
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.estado = Estado;
+    }
 
     public int getIdBairro() {
         return idBairro;
@@ -23,12 +32,12 @@ public class ModeloBairro {
         this.nomeBairro = nomeBairro;
     }
 
-    public int getIdCidade() {
-        return idCidade;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setIdCidade(int idCidade) {
-        this.idCidade = idCidade;
+    public void setCidade(String Cidade) {
+        this.cidade = Cidade;
     }
     
     

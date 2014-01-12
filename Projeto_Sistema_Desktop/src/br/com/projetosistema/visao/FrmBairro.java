@@ -22,10 +22,13 @@ import javax.swing.ListSelectionModel;
  */
 public class FrmBairro extends javax.swing.JFrame {
 
-    ConectaBanco conexaoCidade = new ConectaBanco(); // instancia a classe de conexao do banco com entidade Estado
-    ConectaBanco conexaoBairro = new ConectaBanco();  // instancia a classe de conexao do banco com entidade Cidade
+    ConectaBanco conexaoEstado = new ConectaBanco(); // instancia a classe de conexao do banco com entidade Estado
+    ConectaBanco conexaoCidade = new ConectaBanco(); // instancia a classe de conexao do banco com entidade cidade
+    ConectaBanco conexaoBairro = new ConectaBanco();  // instancia a classe de conexao do banco com entidade Bairro
     ModeloBairro modeloBairro = new ModeloBairro();  //Meu objeto de modelo
     ControleBairro controleBairro = new ControleBairro(); //o controlador do objeto modelo
+    
+    int flag = 1;
 
     /**
      * Creates new form FrmCidade
@@ -33,23 +36,16 @@ public class FrmBairro extends javax.swing.JFrame {
     public FrmBairro() {
         initComponents();
 
+       
         conexaoCidade.conecta(); // abre a conexao do banco dentro da janela
-        conexaoBairro.conecta(); // abre a conexao do banco dentro da janela
-        preencherTabela("SELECT * FROM tb_bairros INNER JOIN tb_cidades ON tb_bairros.id_cidade = tb_cidades.id_cidade");
+        conexaoBairro.conecta(); // abre a conexao do banco dentro da janela       
         conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY nome_cidade ");
-        jCBoxCidade.removeAllItems(); //remove todos os itens ue nao sao ligados ao banco de dados          
-
-        try {
-
-            conexaoCidade.rs.first();
-            do {
-                jCBoxCidade.addItem(conexaoCidade.rs.getString("nome_cidade"));
-                
-            } while (conexaoCidade.rs.next());
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao inerir o comboBox:\n Erro: !" + ex.getMessage());
-        }
-
+        //conexaoEstado.executaSQL("SELECT * FROM tb_estados ORDER BY id_estado");
+        jCBoxCidade.removeAllItems(); //remove todos os itens ue nao sao ligados ao banco de dados 
+        jCBSiglaEstado.removeAllItems();
+         atualizaComboBox();
+         preencherTabela("SELECT * FROM tb_bairros INNER JOIN tb_cidades ON tb_bairros.id_cidade = tb_cidades.id_cidade");
+         
         jTFCodigoBairro.setEnabled(false); // campo desabilitados quando a janela e aberta
         jTFNomeBairro.setEnabled(false);
 
@@ -279,8 +275,8 @@ public class FrmBairro extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCBSiglaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)))
+                                .addComponent(jCBSiglaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jBCadastroBairroSair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBAdicionarCidade))))
@@ -294,14 +290,15 @@ public class FrmBairro extends javax.swing.JFrame {
                     .addComponent(jLCodigoCidade)
                     .addComponent(jTFCodigoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLNomeCidade)
-                    .addComponent(jTFNomeBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLEstado)
-                    .addComponent(jCBoxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBAdicionarCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCBSiglaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLNomeCidade)
+                        .addComponent(jTFNomeBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLEstado)
+                        .addComponent(jCBoxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCBSiglaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBProximo, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
@@ -351,59 +348,52 @@ public class FrmBairro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastroBairroSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroBairroSalvarActionPerformed
-        try {
+          
+        if(flag == 1 ) {
+            
             modeloBairro.setNomeBairro(jTFNomeBairro.getText());
-            conexaoCidade.executaSQL("SELECT * FROM tb_cidades WHERE nome_cidade = '" + jCBoxCidade.getSelectedItem() + "'");
-            conexaoCidade.rs.first();
-            modeloBairro.setIdCidade(conexaoCidade.rs.getInt("id_cidade"));
+            modeloBairro.setCidade("" + jCBoxCidade.getSelectedItem());
             conexaoCidade.executaSQL("SELECT * FROM tb_cidades WHERE uf = '" + jCBSiglaEstado.getSelectedItem() + "'");
-            conexaoCidade.rs.first();
-            modeloBairro.setIdCidade(conexaoCidade.rs.getInt("id_cidade"));
+            try {
+                modeloBairro.setCidade(conexaoCidade.rs.getString("uf"));
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmBairro.class.getName()).log(Level.SEVERE, null, ex);
+            }
             controleBairro.inserirBairro(modeloBairro);
-            JOptionPane.showMessageDialog(null, "Dados Gravados com Sucesso!");
+            preencherTabela("SELECT * FROM tb_bairros INNER JOIN tb_cidades ON tb_bairros.id_cidade = tb_cidades.id_cidade");
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: " + ex.getMessage());
+        } else{
+            modeloBairro.setNomeBairro(jTFNomeBairro.getText());
+            modeloBairro.setCidade("" + jCBoxCidade.getSelectedItem());
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades WHERE uf = '" + jCBSiglaEstado.getSelectedItem() + "'");
+            try {
+                modeloBairro.setCidade(conexaoCidade.rs.getString("uf"));
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmBairro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            controleBairro.alterarBairro(modeloBairro);
+            preencherTabela("SELECT * FROM tb_bairros INNER JOIN tb_cidades ON tb_bairros.id_cidade = tb_cidades.id_cidade");
         }
         jTFCodigoBairro.setEnabled(false);
-        jTFNomeBairro.setEnabled(false);
+        jTFNomeBairro.setEnabled(!true);
         jCBoxCidade.setEnabled(false);
 
-        jTFCodigoBairro.setText("");
         jTFNomeBairro.setText("");
         jCBoxCidade.addItem("");
 
-        jBCadastroBairroSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        jBCadastroBairroSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
         jBCadastroBairroAlterar.setEnabled(false);
         jBCadastroBairroExcluir.setEnabled(false);
-        jBCadastroBairroLimpar.setEnabled(false);
-        jBCadastroBairroNovo.setEnabled(true);
+        jBCadastroBairroLimpar.setEnabled(true);
+        jBCadastroBairroNovo.setEnabled(!false);
         preencherTabela("SELECT * FROM tb_bairros INNER JOIN tb_cidades ON tb_bairros.id_cidade = tb_cidades.id_cidade");
     }//GEN-LAST:event_jBCadastroBairroSalvarActionPerformed
 
     private void jBCadastroBairroExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroBairroExcluirActionPerformed
-        try {
-            modeloBairro.setIdBairro(Integer.parseInt(jTFCodigoBairro.getText()));
-            modeloBairro.setNomeBairro(jTFNomeBairro.getText());
-            modeloBairro.setIdCidade(conexaoCidade.rs.getInt("id_cidade"));
-            if (jTFCodigoBairro.getText().equals("") && jTFNomeBairro.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "o campo esta em branco!");
-                jCBoxCidade.setEnabled(false);
-            } else {
-                int response = JOptionPane.showConfirmDialog(
-                        this, " Voce quer deletar esse arquivo?", null,
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.WARNING_MESSAGE);
-                if (response == JOptionPane.YES_OPTION) {
-                    controleBairro.deletarBairro(modeloBairro);
-                    JOptionPane.showMessageDialog(null, "Dados Deletados com Sucesso!");
-                    conexaoBairro.rs.next();
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: " + ex.getMessage());
-        }
-
+        
+        modeloBairro.setIdBairro(Integer.parseInt(jTFCodigoBairro.getText()));
+        controleBairro.deletarBairro(modeloBairro);
+        
         jTFCodigoBairro.setEnabled(false);
         jTFNomeBairro.setEnabled(false);
         jCBoxCidade.setEnabled(false);
@@ -428,12 +418,12 @@ public class FrmBairro extends javax.swing.JFrame {
         jCBoxCidade.setEnabled(true);
 
         jTFCodigoBairro.setText("");
-        jTFNomeBairro.setText("");
-        jCBoxCidade.addItem("");
+        jTFNomeBairro.setText("");        
 
         jBCadastroBairroSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
         jBCadastroBairroAlterar.setEnabled(true);
-        jBCadastroBairroExcluir.setEnabled(true);
+        jBCadastroBairroExcluir.setEnabled(false);
+        jBCadastroBairroLimpar.setEnabled(true);
         jBCadastroBairroNovo.setEnabled(false);
     }//GEN-LAST:event_jBCadastroBairroNovoActionPerformed
 
@@ -445,134 +435,87 @@ public class FrmBairro extends javax.swing.JFrame {
 
 
     private void jBPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimeiroActionPerformed
+        
+        modeloBairro = controleBairro.Primeiro();
+        jTFCodigoBairro.setText(String.valueOf(modeloBairro.getIdBairro()));
+        jTFNomeBairro.setText(modeloBairro.getNomeBairro());
+        jCBoxCidade.setSelectedItem(modeloBairro.getCidade());
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades WHERE uf = '" + jCBSiglaEstado.getSelectedItem() + "'");
+            jCBSiglaEstado.setSelectedItem(conexaoCidade.rs.getString("uf"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao executar o Primeiro\n Erro: " + ex.getMessage());
+        }
+        
         jBCadastroBairroAlterar.setEnabled(true);
         jBCadastroBairroExcluir.setEnabled(true);
-        jBCadastroBairroLimpar.setEnabled(true);
-        jBCadastroBairroNovo.setEnabled(false);
-        jTFNomeBairro.setEnabled(true);
-        try {
-            conexaoBairro.executaSQL("SELECT * FROM tb_bairros INNER JOIN tb_cidades ON tb_bairros.id_cidade = tb_cidades.id_cidade");
-            conexaoBairro.rs.first();
-            jTFCodigoBairro.setText(String.valueOf(conexaoBairro.rs.getInt("id_bairro")));
-            jTFNomeBairro.setText(conexaoBairro.rs.getString("nome_bsirro"));
+        jBCadastroBairroLimpar.setEnabled(true);  
 
-            // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
-            //conexaoEstado.rs.first();
-            jCBoxCidade.setSelectedItem(conexaoCidade.rs.getString("nome_cidade"));//comboBox para mostrando o Estado referente
-
-            jTFCodigoBairro.setEnabled(true); // campo habilitados quando a janela e aberta
-            jTFNomeBairro.setEnabled(true);
-            jCBoxCidade.setEnabled(true);
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
-        }
     }//GEN-LAST:event_jBPrimeiroActionPerformed
 
     private void jBUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUltimoActionPerformed
+        
+        modeloBairro = controleBairro.Ultimo();
+        jTFCodigoBairro.setText(String.valueOf(modeloBairro.getIdBairro()));
+        jTFNomeBairro.setText(modeloBairro.getNomeBairro());
+        jCBoxCidade.setSelectedItem(modeloBairro.getCidade());
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades WHERE uf = '" + jCBSiglaEstado.getSelectedItem() + "'");
+            jCBSiglaEstado.setSelectedItem(conexaoCidade.rs.getString("uf"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao executar o Ultimo\n Erro: " + ex.getMessage());
+        }
+        
         jBCadastroBairroAlterar.setEnabled(true);
         jBCadastroBairroExcluir.setEnabled(true);
         jBCadastroBairroLimpar.setEnabled(true);
-        jBCadastroBairroNovo.setEnabled(false);
-        jTFNomeBairro.setEnabled(true);
-        try {
-            conexaoBairro.executaSQL("SELECT * FROM tb_bairros INNER JOIN tb_cidades ON tb_bairros.id_cidade = tb_cidades.id_cidade");
-            conexaoBairro.rs.last();
-            jTFCodigoBairro.setText(String.valueOf(conexaoBairro.rs.getInt("id_cidade")));
-            jTFNomeBairro.setText(conexaoBairro.rs.getString("nome_cidade"));
-
-            // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
-            //conexaoEstado.rs.last();
-            jCBoxCidade.setSelectedItem(conexaoBairro.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-
-            jTFCodigoBairro.setEnabled(true); // campo habilitados quando a janela e aberta
-            jTFNomeBairro.setEnabled(true);
-            jCBoxCidade.setEnabled(true);
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
-        }
+        
     }//GEN-LAST:event_jBUltimoActionPerformed
 
     private void jBAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnteriorActionPerformed
+         modeloBairro = controleBairro.Anterior();
+        jTFCodigoBairro.setText(String.valueOf(modeloBairro.getIdBairro()));
+        jTFNomeBairro.setText(modeloBairro.getNomeBairro());
+        jCBoxCidade.setSelectedItem(modeloBairro.getCidade());
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades WHERE uf = '" + jCBSiglaEstado.getSelectedItem() + "'");
+            jCBSiglaEstado.setSelectedItem(conexaoCidade.rs.getString("uf"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao executar o Anterior\n Erro: " + ex.getMessage());
+        }
+        
         jBCadastroBairroAlterar.setEnabled(true);
         jBCadastroBairroExcluir.setEnabled(true);
         jBCadastroBairroLimpar.setEnabled(true);
-        jBCadastroBairroNovo.setEnabled(false);
-        jTFNomeBairro.setEnabled(true);
-        try {
-            //conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY id_cidade");            
-            conexaoBairro.rs.previous();
-
-            jTFCodigoBairro.setEnabled(true); // campo habilitados quando a janela e aberta
-            jTFNomeBairro.setEnabled(true);
-            jCBoxCidade.setEnabled(true);
-
-            jTFCodigoBairro.setText(String.valueOf(conexaoBairro.rs.getInt("id_cidade")));
-            jTFNomeBairro.setText(conexaoBairro.rs.getString("nome_cidade"));
-
-            // conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
-            //conexaoEstado.rs.previous();
-            jCBoxCidade.setSelectedItem(conexaoBairro.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente                             
-
-        } catch (SQLException ex) {
-
-        }
+        
     }//GEN-LAST:event_jBAnteriorActionPerformed
 
     private void jBProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProximoActionPerformed
+         modeloBairro = controleBairro.Proximo();
+        jTFCodigoBairro.setText(String.valueOf(modeloBairro.getIdBairro()));
+        jTFNomeBairro.setText(modeloBairro.getNomeBairro());
+        jCBoxCidade.setSelectedItem(modeloBairro.getCidade());
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades WHERE uf = '" + jCBSiglaEstado.getSelectedItem() + "'");
+            jCBSiglaEstado.setSelectedItem(conexaoCidade.rs.getString("uf"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao executar o Proximo\n Erro: " + ex.getMessage());
+        }
+        
         jBCadastroBairroAlterar.setEnabled(true);
         jBCadastroBairroExcluir.setEnabled(true);
         jBCadastroBairroLimpar.setEnabled(true);
-        jBCadastroBairroNovo.setEnabled(false);
-        jTFNomeBairro.setEnabled(true);
-        try {
-            //conexaoCidade.executaSQL("SELECT * FROM cidade ORDER BY id_cidade");            
-            conexaoBairro.rs.next();
-            jTFCodigoBairro.setText(String.valueOf(conexaoBairro.rs.getInt("id_cidade")));
-            jTFNomeBairro.setText(conexaoBairro.rs.getString("nome_cidade"));
-
-            //conexaoEstado.executaSQL("SELECT * FROM tb_estados WHERE id_estado=" +conexaoCidade.rs.getInt("id_estado"));
-            //conexaoEstado.rs.next();
-            jCBoxCidade.setSelectedItem(conexaoBairro.rs.getString("nome_estado"));//comboBox para mostrando o Estado referente
-
-            jTFCodigoBairro.setEnabled(true); // campo habilitados quando a janela e aberta
-            jTFNomeBairro.setEnabled(true);
-            jCBoxCidade.setEnabled(true);
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado no Banco\n Erro: " + ex.getMessage());
-        }
+        
     }//GEN-LAST:event_jBProximoActionPerformed
 
     private void jBCadastroBairroAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroBairroAlterarActionPerformed
-        // TODO add your handling code here:
-
-        try {
-            modeloBairro.setIdBairro(Integer.parseInt(jTFCodigoBairro.getText()));
-            modeloBairro.setNomeBairro(jTFNomeBairro.getText());
-            conexaoCidade.executaSQL("SELECT * FROM tb_cidades WHERE nome_cidade ='" + jCBoxCidade.getSelectedItem() + "'");
-            conexaoCidade.rs.first();
-            modeloBairro.setIdCidade(conexaoCidade.rs.getInt("id_cidade"));
-            controleBairro.alterarBairro(modeloBairro);
-            JOptionPane.showMessageDialog(null, "Dados Atualizados com Sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar no Banco\n Erro: " + ex.getMessage());
-        }
-
-        jTFCodigoBairro.setEnabled(false);
-        jTFNomeBairro.setEnabled(false);
-        jCBoxCidade.setEnabled(false);
-
-        jTFCodigoBairro.setText("");
-        jTFNomeBairro.setText("");
-        jCBoxCidade.addItem("");
-
-        jBCadastroBairroSalvar.setEnabled(false);     // DESABILITA OS BOTOES      
+        
+         flag = 2;
+         
+        jTFNomeBairro.setEnabled(true);
+        jBCadastroBairroSalvar.setEnabled(true);     // DESABILITA OS BOTOES      
         jBCadastroBairroAlterar.setEnabled(false);
-        jBCadastroBairroExcluir.setEnabled(false);
-        jBCadastroBairroLimpar.setEnabled(false);
-        jBCadastroBairroNovo.setEnabled(true);
+        jBCadastroBairroNovo.setEnabled(false);
 
         preencherTabela("SELECT * FROM tb_bairros INNER JOIN tb_cidades ON tb_bairros.id_cidade = tb_cidades.id_cidade");
     }//GEN-LAST:event_jBCadastroBairroAlterarActionPerformed
@@ -591,6 +534,7 @@ public class FrmBairro extends javax.swing.JFrame {
         jBCadastroBairroAlterar.setEnabled(false);
         jBCadastroBairroExcluir.setEnabled(false);
         jBCadastroBairroNovo.setEnabled(true);
+        
     }//GEN-LAST:event_jBCadastroBairroLimparActionPerformed
 
     private void jCBoxCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBoxCidadeActionPerformed
@@ -666,6 +610,25 @@ public class FrmBairro extends javax.swing.JFrame {
                 new JfrmPrincipal().setVisible(true);
             }
         });
+    }
+    
+    public void atualizaComboBox(){
+      jCBoxCidade.removeAllItems();
+      jCBSiglaEstado.removeAllItems();      
+     
+        try {
+            conexaoCidade.executaSQL("SELECT * FROM tb_cidades ORDER BY nome_cidade");
+           
+            conexaoCidade.rs.first();
+           do {                
+                jCBoxCidade.addItem(conexaoCidade.rs.getString("nome_cidade"));
+                jCBSiglaEstado.addItem(conexaoCidade.rs.getString("uf"));
+            } while (conexaoCidade.rs.next());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Preencher as Cidades e Estados\n Erro: " + ex.getMessage());
+        }
+              
+      
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
